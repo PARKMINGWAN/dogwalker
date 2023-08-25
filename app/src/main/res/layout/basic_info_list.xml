@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="이름 : "/>
+
+        <TextView
+            android:id="@+id/txtId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디 : "
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/txtPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="패스워드 : "
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/txtTel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전화번호 : "
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/txtAddr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주소 : "
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/txtCareer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="산책 경력 : "
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/txtNurture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="양육 유무 : "
+            android:textSize="20sp"/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#73E7E7E7"
+    android:orientation="vertical"
+    tools:context=".ui.mypage.OwnerMyPageFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:civ_border_color="@color/white"
+        android:layout_gravity="center"
+        app:civ_border_overlay="true"
+        app:civ_border_width="7dp"
+        android:src="@drawable/default_profile"
+        />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/fontName" />
+
+        <Button
+            android:id="@+id/btnInsert"
+            style="@style/btnTextStyle"
+            android:backgroundTint="#011EB1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:text="추가" />
+
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/layout_background">
+
+
+                <TextView
+                    android:id="@+id/test1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/fontStyle"
+                    android:text="아이디 : " />
+
+                <TextView
+                    android:id="@+id/txtId"
+                    android:layout_toRightOf="@+id/test1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/test1"
+                    style="@style/fontDefault" />
+
+                <TextView
+                    android:id="@+id/test2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/fontStyle"
+                    android:layout_below="@+id/test1"
+                    android:text="패스워드 : " />
+
+                <TextView
+                    android:id="@+id/txtPwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/test2"
+                    android:layout_alignTop="@+id/test2"
+                    style="@style/fontDefault" />
+
+                <TextView
+                    android:id="@+id/test3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/fontStyle"
+                    android:layout_below="@+id/test2"
+                    android:text="전화번호 : " />
+
+            <TextView
+                android:id="@+id/txtTel"
+                style="@style/fontDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/test3"
+                android:layout_toRightOf="@+id/test3" />
+
+                <TextView
+                    android:id="@+id/test4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/fontStyle"
+                    android:layout_below="@+id/test3"
+                    android:text="주소 : " />
+
+                <TextView
+                    android:id="@+id/txtAddr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/test4"
+                    android:layout_alignTop="@+id/test4"
+                    style="@style/fontDefault" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/layout_background">
+
+            <TextView
+                android:id="@+id/test5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강아지 품종 : "
+                style="@style/fontStyle" />
+
+
+            <TextView
+                android:id="@+id/txtBreed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/test5"
+                android:layout_alignTop="@+id/test5"
+                style="@style/fontDefault" />
+
+
+            <TextView
+                android:id="@+id/test6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="강아지 나이 : "
+                style="@style/fontStyle"
+                android:layout_below="@+id/test5"/>
+
+            <TextView
+                android:id="@+id/txtDogAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/test6"
+                android:layout_alignTop="@+id/test6"
+                style="@style/fontDefault"/>
+
+            <TextView
+                android:id="@+id/test7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="산책 시간 : "
+                style="@style/fontStyle"
+                android:layout_below="@+id/test6"
+
+                />
+
+            <TextView
+                android:id="@+id/txtDogWalk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/test7"
+                android:layout_toRightOf="@+id/test7"
+                style="@style/fontDefault" />
+
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/layout_background"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+
+            <Button
+                android:id="@+id/btnUpdate"
+                style="@style/btnTextStyle"
+                android:layout_width="370dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="#011EB1"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:text="수정" />
+            <Button
+                android:id="@+id/btnimgInsert"
+                style="@style/btnTextStyle"
+                android:layout_width="370dp"
+                android:backgroundTint="#011EB1"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:text="이미지 추가"
+                />
+
+            <Button
+                android:id="@+id/btnLogout"
+                style="@style/btnTextStyle"
+                android:layout_width="370dp"
+                android:layout_gravity="bottom"
+                android:backgroundTint="#011EB1"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:text="로그아웃" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="btnTextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="floatingBtn" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:backgroundTint">#F3002AFF</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:src">@android:drawable/ic_input_add</item>
+    </style>
+
+    <style name="fontStyle" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textSize">17sp</item>
+
+    </style>
+
+    <style name="fontName" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="fontDefault" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+</resources>

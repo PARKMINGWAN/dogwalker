@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "98321455662",
+    "firebase_url": "https://dogwalker-d68ac-default-rtdb.firebaseio.com",
+    "project_id": "dogwalker-d68ac",
+    "storage_bucket": "dogwalker-d68ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98321455662:android:a4975b92a3a9d81e36ddbf",
+        "android_client_info": {
+          "package_name": "com.example.dogwalker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98321455662-hc0llinn7pp78596s4tc09qgvtknv950.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dogwalker",
+            "certificate_hash": "8c15cef18bbf9c5835b9a13afcc673de8a62d7e0"
+          }
+        },
+        {
+          "client_id": "98321455662-7d9nen3s2hgboetq99q05cgpuguurei7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD68Sot0wwpo6-P4llogBJ-DXmZyhcV_Y0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98321455662-7d9nen3s2hgboetq99q05cgpuguurei7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

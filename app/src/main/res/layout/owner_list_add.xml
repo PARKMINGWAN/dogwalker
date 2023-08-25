@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/dog_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="강아지 이름"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@android:color/transparent"/>
+
+        <EditText
+            android:id="@+id/dog_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="(나이)"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@android:color/transparent"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <EditText
+        android:id="@+id/dog_breed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="강아지 견종"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@android:color/transparent"/>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <EditText
+        android:id="@+id/dog_walk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="산책시간"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@android:color/transparent"/>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <EditText
+        android:id="@+id/dog_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="사는 곳"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@android:color/transparent"/>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+
+</LinearLayout>

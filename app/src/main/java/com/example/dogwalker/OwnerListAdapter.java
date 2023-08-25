@@ -21,12 +21,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyViewHolder> {
     DatabaseReference mDatabase;
 
+    double longitudes;
+    double latitudes;
     private List<OwnerProfile> ownerList;
 
     public OwnerListAdapter(List<OwnerProfile> ownerList) {
@@ -41,10 +48,80 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
     public void setOnItemClickListener(onItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+    private void requestGeocode(String addr) {
+        try {
+            BufferedReader bufferedReader;
+            StringBuilder stringBuilder = new StringBuilder();
+            String query = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=" + URLEncoder.encode(addr, "UTF-8");
+            URL url = new URL(query);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            if (connection != null) {
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("X-NCP-APIGW-API-KEY-ID", "cxzobj9huy");
+                connection.setRequestProperty("X-NCP-APIGW-API-KEY", "wQF4VmvAGfParPeLkzPmxW0xmJIV06qxB9nd7ENo");
+                connection.setDoInput(true);
+
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == 200) {
+                    bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                } else {
+                    bufferedReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+                }
+
+                String line = null;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line).append("\n");
+                }
+
+                int indexFirst;
+                int indexLast;
+
+                indexFirst = stringBuilder.indexOf("\"x\":\"");
+                indexLast = stringBuilder.indexOf("\",\"y\":");
+                String x = stringBuilder.substring(indexFirst + 5, indexLast);
+
+                indexFirst = stringBuilder.indexOf("\"y\":\"");
+                indexLast = stringBuilder.indexOf("\",\"distance\":");
+                String y = stringBuilder.substring(indexFirst + 5, indexLast);
+
+                Log.d("지오코드 체크",x+" ");
+
+                longitudes= Double.parseDouble(x);
+                latitudes = Double.parseDouble(y);
+                Log.d("지오코드 체크2",longitudes+" ");
+                bufferedReader.close();
+                connection.disconnect();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void addItem(OwnerProfile ownerProfile) {
         //Toast.makeText(,Toast.LENGTH_SHORT).show();
         mDatabase =FirebaseDatabase.getInstance().getReference("list");
+        Thread datathread = new Thread(){
+            @Override
+            public void run(){
+                requestGeocode(ownerProfile.getAddr());
+            }
+        };
+        datathread.start();
+        try {
+            datathread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
+        ownerProfile.setLatitude(latitudes);
+        ownerProfile.setLongitude(longitudes);
+        Log.d("지오코드 체크3",longitudes+" ");
         ownerList.add(ownerProfile);
         mDatabase.child("owner").push().setValue(ownerProfile);
         notifyDataSetChanged();
@@ -150,6 +227,8 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
             });
 
         }
+
+
 
 
 /*        void onBind(Owner owner) {

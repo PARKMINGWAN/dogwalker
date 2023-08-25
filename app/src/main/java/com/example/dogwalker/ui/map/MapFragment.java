@@ -69,42 +69,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(@NonNull NaverMap naverMap) {
         InfoWindow infoWindow = new InfoWindow();
 
-        Marker marker = new Marker();
-        marker.setPosition(new LatLng(35.1561411, 129.0594806));
-        marker.setMap(naverMap);
-        marker.setOnClickListener(overlay -> {
-            ViewGroup viewGroup = (ViewGroup) getView().findViewById(R.id.fragment_map_container);
-            MapPoint mapPoint = new MapPoint(getContext().getApplicationContext(), viewGroup);
 
-            infoWindow.setAdapter(mapPoint);
-
-            infoWindow.setZIndex(10);
-            infoWindow.setAlpha(0.9f);
-            infoWindow.open(marker);
-            return false;
-        });
 
         this.naverMap = naverMap;
         naverMap.setLocationSource(locationSource);
 
-        path.setCoords(Arrays.asList(
-                new LatLng(35.1561411, 129.0594806),
-                new LatLng(35.155509, 129.058220),
-                new LatLng(35.154200, 129.057825)
-        ));
-        path.setMap(naverMap);
-
-        List<LatLng> coords = new ArrayList<>();
-        Collections.addAll(coords,
-                new LatLng(35.1561411, 129.0594806),
-                new LatLng(35.155509, 129.058220),
-                new LatLng(35.154200, 129.057825));
-        path.setCoords(coords);
-
-        coords.set(0, new LatLng(35.154200, 129.057825));
-        path.setCoords(coords);
-        path.setWidth(30);
-        path.setOutlineWidth(5);
     }
 
 

@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        }else { //로그인상태
+        }else { //로그인상태.
            Intent intent = new Intent(MainActivity.this, Walker_tab.class);
 
             startActivity(intent);

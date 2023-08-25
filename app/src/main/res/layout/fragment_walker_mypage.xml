@@ -17,6 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="40dp"
+            android:padding="20dp"
+
             >
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfile"
@@ -173,12 +177,15 @@
             android:orientation="vertical"
             android:background="@drawable/layout_background"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp">
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="100dp"
+            >
 
             <Button
                 android:id="@+id/btnUpdate"
                 style="@style/btnTextStyle"
-                android:layout_width="370dp"
+                android:layout_width="305dp"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="#011EB1"
                 android:layout_gravity="bottom"
@@ -189,7 +196,7 @@
             <Button
                 android:id="@+id/btnimgInsert"
                 style="@style/btnTextStyle"
-                android:layout_width="370dp"
+                android:layout_width="305dp"
                 android:backgroundTint="#011EB1"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
@@ -200,7 +207,7 @@
             <Button
                 android:id="@+id/btnImgDelete"
                 style="@style/btnTextStyle"
-                android:layout_width="370dp"
+                android:layout_width="305dp"
                 android:backgroundTint="#011EB1"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
@@ -213,7 +220,7 @@
             <Button
                 android:id="@+id/btnLogout"
                 style="@style/btnTextStyle"
-                android:layout_width="370dp"
+                android:layout_width="305dp"
                 android:layout_gravity="bottom"
                 android:backgroundTint="#011EB1"
                 android:layout_marginBottom="15dp"

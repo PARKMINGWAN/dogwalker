@@ -8,14 +8,14 @@ public class OwnerProfile {
     String addr;
     String bread;
     String dogAge;
-
+    String dogName;
     String WalkTime;
 
     public OwnerProfile(String addr, String bread, String dogAge, String walkTime, String dogName) {
         this.addr = addr;
         this.bread = bread;
         this.dogAge = dogAge;
-        WalkTime = walkTime;
+        this.WalkTime = walkTime;
         this.dogName = dogName;
     }
 
@@ -62,5 +62,5 @@ public class OwnerProfile {
         this.dogName = dogName;
     }
 
-    String dogName;
+
 }

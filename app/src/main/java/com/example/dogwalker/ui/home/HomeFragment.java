@@ -119,32 +119,6 @@ public class HomeFragment extends Fragment {
         builder.setNegativeButton("닫기", null);
         builder.show();
     }
-    public interface FirebaseCallback {
-        void onResponse(Owner value);
-    }
-    public void readFirebaseValue(FirebaseCallback callback) {
-        DatabaseReference listRef = mDatabase.child("list").child("owner");
-        listRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    Owner value = task.getResult().getValue(Owner.class);
-                    for (DataSnapshot snapshot : task.getResult().getChildren())
-                    {
-                        //ownerList.add(value);
-                        callback.onResponse(value);
-                    }
-
-
-                } else {
-                    //  Log.d(TAG, task.getException().getMessage());.
-                }
-            }
-        });
-    }
-
-
-
 
     public void readFirebaseValue() {
         DatabaseReference listRef = mDatabase.child("list").child("owner");

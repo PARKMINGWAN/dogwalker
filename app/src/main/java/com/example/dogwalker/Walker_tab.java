@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.example.dogwalker.databinding.TabWalkerBinding;
 import com.example.dogwalker.ui.home.HomeFragment;
-import com.example.dogwalker.ui.map.WalkerMapFragment;
+import com.example.dogwalker.ui.map.MapFragment;
 import com.example.dogwalker.ui.mypage.WalkerMyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -21,7 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 public class Walker_tab extends AppCompatActivity {
     private TabWalkerBinding tabWalkerBinding;
     HomeFragment homeFragment;
-    WalkerMapFragment mapFragment;
+    MapFragment mapFragment;
     WalkerMyPageFragment walkerMyPageFragment;
 
     @Override
@@ -42,7 +42,7 @@ public class Walker_tab extends AppCompatActivity {
         NavigationUI.setupWithNavController(tabWalkerBinding.navView, navController);
 
         homeFragment = new HomeFragment();
-        mapFragment = new WalkerMapFragment();
+        mapFragment = new MapFragment();
         walkerMyPageFragment = new WalkerMyPageFragment();
 
 

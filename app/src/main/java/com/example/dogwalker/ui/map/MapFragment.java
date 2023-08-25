@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.dogwalker.MapPoint;
 import com.example.dogwalker.R;
-import com.example.dogwalker.databinding.FragmentDashboardBinding;
+import com.example.dogwalker.databinding.FragmentMapBinding;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.NaverMap;
@@ -28,9 +27,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class WalkerMapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-    private FragmentDashboardBinding binding;
+    private FragmentMapBinding binding;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private static final String[] PERMISSIONS = {
@@ -61,10 +60,7 @@ public class WalkerMapFragment extends Fragment implements OnMapReadyCallback {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MapViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(MapViewModel.class);
-
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentMapBinding.inflate(inflater, container, false);
         return inflater.inflate(R.layout.fragment_map, container, false);
     }
 

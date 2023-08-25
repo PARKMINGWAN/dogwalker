@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapFragment"
-    android:id="@+id/fragment_map_container">
+    android:id="@+id/fragment_map_container"
+    tools:context=".ui.map.MapFragment">
 
     <androidx.fragment.app.FragmentContainerView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,5 +17,12 @@
         app:navermap_longitude="129.0554875"
         app:navermap_zoom="12"
         app:navermap_mapType="Terrain" />
+
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|center"
+        android:text="리스트 불러오기" />
 
 </FrameLayout>

@@ -128,17 +128,6 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
 
     }
 
-    //수정
-    private void updateItem(Owner owner, int position) {
-        OwnerProfile owner1 = ownerList.get(position);
-        owner1.setDogName(owner.getName());
-        owner1.setDogAge(owner.getDog_age());
-        owner1.setBread(owner.getBreed());
-        owner1.setWalkTime(owner.getDog_walk());
-        owner1.setAddr(owner.getAddr());
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -173,27 +162,6 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
                 dog_breed.setText(owner.getBread());
                 dog_walk.setText(owner.getWalkTime());
                 dog_addr.setText(owner.getAddr());
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setTitle("반려인 프로필 수정");
-                builder.setView(dialogView);
-
-                builder.setPositiveButton("수정", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        OwnerProfile owner1 = new OwnerProfile(
-                                dog_name.getText().toString(),
-                                dog_addr.getText().toString(),
-                                dog_breed.getText().toString(),
-                                dog_age.getText().toString(),
-                                dog_walk.getText().toString());
-                        //ownerListAdapter.updateItem(owner);
-
-                    }
-                });
-                builder.setNegativeButton("닫기", null);
-                builder.show();
-
 
             }
         });

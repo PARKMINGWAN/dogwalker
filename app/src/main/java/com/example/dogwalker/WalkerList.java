@@ -1,3 +1,4 @@
+/*
 package com.example.dogwalker;
 
 import androidx.appcompat.app.AlertDialog;
@@ -88,14 +89,16 @@ public class WalkerList extends AppCompatActivity {
         }
     });
 
-        /*        AlertDialog.Builder builder2 = new AlertDialog.Builder(OwnerList.this);
+        */
+/*        AlertDialog.Builder builder2 = new AlertDialog.Builder(OwnerList.this);
         builder2.setView(dialogView);
         builder2.setPositiveButton("수정", new DialogInterface.OnClickListener() {
         @Overridepublic void onClick(DialogInterface dialogInterface, int i) {
         Walker walker = new Walker();
-        }});*/
+        }});*//*
+
         builder.setNegativeButton("닫기", null);
         builder.show();
 
         }
-}
+}*/

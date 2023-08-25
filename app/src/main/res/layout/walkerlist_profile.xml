@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".OwnerList"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,6 +26,20 @@
 
             <TextView
                 android:id="@+id/walkerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="name"/>
+
+            <TextView
+                android:id="@+id/walkerTel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="name"/>
+
+            <TextView
+                android:id="@+id/walkerAddr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

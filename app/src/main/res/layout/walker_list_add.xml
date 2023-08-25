@@ -2,13 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/walker_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="이름"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@android:color/transparent"/>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <EditText
+        android:id="@+id/walker_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="전화번호"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@android:color/transparent"/>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <EditText
+        android:id="@+id/walker_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="주소"
         android:layout_marginLeft="10dp"
         android:textSize="16sp"
         android:paddingTop="10dp"
@@ -28,11 +62,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/nurture"
+        <TextView
+            android:id="@+id/walker_nurture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="양육 유무"
+            android:text="양육 유무"
             android:textSize="16sp"
             android:layout_marginLeft="10dp"
             android:paddingTop="10dp"
@@ -64,7 +98,7 @@
         android:background="@android:color/darker_gray"/>
 
     <EditText
-        android:id="@+id/carrer"
+        android:id="@+id/walker_career"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="산책 경험"

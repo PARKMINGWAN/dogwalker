@@ -28,6 +28,7 @@ import com.example.dogwalker.HomePage;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
 import com.example.dogwalker.Owner;
+import com.example.dogwalker.OwnerDetail;
 import com.example.dogwalker.R;
 import com.example.dogwalker.Walker;
 import com.example.dogwalker.WalkerAdapter;
@@ -213,16 +214,19 @@ public class OwnerMyPageFragment extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("btnUpdate 진입 : ", "++++++");
-                mDatabase = FirebaseDatabase.getInstance().getReference("users");
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
-                String uid = user.getUid();
+                Intent intent = new Intent(view.getContext(), OwnerDetail.class);
+                startActivity(intent);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setView(dialogView);
-                builder.setNegativeButton("취소", null);
-                builder.setPositiveButton("수정",null);
-                Log.d("btnUpdate dialogView : ",dialogView.toString());
+//                Log.d("btnUpdate 진입 : ", "++++++");
+//                mDatabase = FirebaseDatabase.getInstance().getReference("users");
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+//                String uid = user.getUid();
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+//                builder.setView(dialogView);
+//                builder.setNegativeButton("취소", null);
+//                builder.setPositiveButton("수정",null);
+//                Log.d("btnUpdate dialogView : ",dialogView.toString());
 
 
 

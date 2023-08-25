@@ -25,6 +25,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.dogwalker.FirebaseManager;
 import com.example.dogwalker.HomePage;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
@@ -67,11 +68,12 @@ public class WalkerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert;
+    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete;
     ImageView profileImg;
 
     EditText etName,etId,etPwd,etTel,etAddr,etCareer;
     Spinner etNurture;
+    FirebaseManager firebaseManager = new FirebaseManager();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -85,7 +87,7 @@ public class WalkerMyPageFragment extends Fragment {
         btnInsert = view.findViewById(R.id.btnInsert);
         btnImgInsert = view.findViewById(R.id.btnimgInsert);
         btnUpdate = view.findViewById(R.id.btnUpdate);
-
+        btnImgDelete = view.findViewById(R.id.btnImgDelete);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -114,6 +116,7 @@ public class WalkerMyPageFragment extends Fragment {
 
 
         progressBar.setVisibility(View.INVISIBLE);
+        firebaseManager.fireBaseImgLoad(profileImg, getContext(), view, 0);
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,8 +143,7 @@ public class WalkerMyPageFragment extends Fragment {
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fireBaseImgUpload();
-
+                firebaseManager.createProfileImg(profileImg, 0, view, imgUrl, progressBar, getContext());
             }
         });
 
@@ -159,6 +161,13 @@ public class WalkerMyPageFragment extends Fragment {
                 }else {
 
                 }
+            }
+        });
+        btnImgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseManager.fireBaseImgDelete(0);
+                profileImg.setImageResource(R.drawable.default_profile);
             }
         });
 
@@ -230,54 +239,10 @@ public class WalkerMyPageFragment extends Fragment {
         return view;
     }
 
-
-
-    private void fireBaseImgUpload()
-    {
-        if (imgUrl == null) {
-            return;
-        }
-
-        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-
-        //저장할 파일 이름이 중복되지 않도록 날짜 붙여주기
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String fileName = "IMG_" + sdf.format(new Date()) + ".jpg";
-
-        //저장할 파일 위치에 대한 참조객체
-        StorageReference imgRef = firebaseStorage.getReference(uid +"/"+ fileName); //저장할 이름
-        //폴더가 없으면 만들고 있으면 그냥 참조한다
-
-        //위 저장 경로 참조객체에게 실제파일 업로드 시키기
-        imgRef.putFile(imgUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(getContext(), "업로드 성공", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText(getContext(), "error : " + e, Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
-    }
-
-
     public interface FirebaseCallback {
         void onResponse(Walker value);
     }
+
     public void readFirebaseValue(FirebaseCallback callback) {
 
         DatabaseReference uidRef = mDatabase.child(uid).child("walker");
@@ -294,25 +259,7 @@ public class WalkerMyPageFragment extends Fragment {
             }
         });
     }
-    private void fireBaseImgLoad(ImageView imageView, Context context, String path) {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
-        StorageReference imgRef = storageReference.child(uid);
-        Toast.makeText(getContext(),"imgRef",Toast.LENGTH_SHORT).show();
-        if(imgRef != null) {
-            imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Toast.makeText(getContext(),"사진불러오기 성공",Toast.LENGTH_SHORT).show();
-                    Glide.with(context)
-                            .load(storageReference)
-                            .into(imageView);
-
-                    imageView.setImageURI(uri);
-                }
-            });
-        }
-    }
 
 
 

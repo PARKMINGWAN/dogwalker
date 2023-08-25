@@ -52,11 +52,20 @@
 
 
             <TextView
+                android:id="@+id/test1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"/>
+
+
+
+            <TextView
                 android:id="@+id/test2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
-                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@+id/test1"
+                android:layout_alignTop="@+id/test1"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/pretendard"
                 android:text="사용자 정보"
@@ -68,7 +77,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/test2"
-                    style="@style/fontStyle"
+                    android:fontFamily="@font/pretendard"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="17sp"
                     android:text="전화번호" />
 
                 <TextView
@@ -77,7 +89,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/test3"
-                    android:layout_toRightOf="@+id/test3"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:text="010-2222-3333"
+                    android:textColor="#818181"
                     />
 
                 <TextView

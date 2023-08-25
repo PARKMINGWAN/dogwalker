@@ -16,10 +16,7 @@ public class OwnerDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_owner);
-
-
         progressBar = findViewById(R.id.progress_bar);
-
         progressBar.setVisibility(View.INVISIBLE);
 
     }

@@ -152,7 +152,7 @@ public class OwnerMyPageFragment extends Fragment {
             public void onResponse(Owner value) {
                 if (value!=null) {
                     txtName.setText( value.getName());
-                    txtId.setText( value.getId());
+                    txtId.setText(value.getId());
                     txtAddr.setText( value.getAddr());
                     txtTel.setText( value.getTel());
                     txtPwd.setText( value.getPwd());

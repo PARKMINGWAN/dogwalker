@@ -1,6 +1,8 @@
 package com.example.dogwalker;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,11 +34,13 @@ import java.util.List;
 public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyViewHolder> {
     DatabaseReference mDatabase;
 
+    Context context;//intent 사용하기 위해서 추가ㄴ
     double longitudes;
     double latitudes;
     private List<OwnerProfile> ownerList;
 
-    public OwnerListAdapter(List<OwnerProfile> ownerList) {
+    public OwnerListAdapter(Context context,List<OwnerProfile> ownerList) {
+        this.context=context;
         this.ownerList = ownerList;
     }
 
@@ -123,7 +127,7 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
         ownerProfile.setLongitude(longitudes);
         Log.d("지오코드 체크3",longitudes+" ");
         ownerList.add(ownerProfile);
-        mDatabase.child("owner").push().setValue(ownerProfile);
+        mDatabase.child("owner").child(ownerProfile.getOwnerUUID()).setValue(ownerProfile);
         notifyDataSetChanged();
 
     }
@@ -141,18 +145,23 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         OwnerProfile owner = ownerList.get(position);
         if (owner != null) {
-            holder.dogName.setText(owner.getDogName());
-            holder.dogAge.setText(owner.getDogAge());
-            holder.dogBreed.setText(owner.getBread());
-            holder.dogWalk.setText(owner.getWalkTime());
-            holder.addr.setText(owner.getAddr());
+
+                holder.dogName.setText(owner.getDogName());
+                holder.dogAge.setText(owner.getDogAge());
+                holder.dogBreed.setText(owner.getBread());
+                holder.dogWalk.setText(owner.getWalkTime());
+                holder.addr.setText(owner.getAddr());
+
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 View dialogView = view.inflate(view.getContext(), R.layout.owner_list_add, null);
-                EditText dog_name = dialogView.findViewById(R.id.dog_name);
+                Intent intent = new Intent(view.getContext(), OwnerDetail.class);
+                intent.putExtra("dogUUID",owner.getOwnerUUID());
+              context.startActivity(intent);
+            /*    EditText dog_name = dialogView.findViewById(R.id.dog_name);
                 EditText dog_age = dialogView.findViewById(R.id.dog_age);
                 EditText dog_breed = dialogView.findViewById(R.id.dog_breed);
                 EditText dog_walk = dialogView.findViewById(R.id.dog_walk);
@@ -161,7 +170,7 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
                 dog_age.setText(owner.getDogAge());
                 dog_breed.setText(owner.getBread());
                 dog_walk.setText(owner.getWalkTime());
-                dog_addr.setText(owner.getAddr());
+                dog_addr.setText(owner.getAddr());*/
 
             }
         });

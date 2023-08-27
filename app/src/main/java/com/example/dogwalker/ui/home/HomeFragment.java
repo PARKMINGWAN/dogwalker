@@ -22,18 +22,22 @@ import com.example.dogwalker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class HomeFragment extends Fragment {
     List<OwnerProfile> ownerList;
 
     private OwnerListAdapter ownerListAdapter;
-    EditText dog_name, dog_age, dog_breed, dog_walk, dog_addr;
+    EditText dog_name, dog_age, dog_breed, dog_walk, dog_addr ,onwerTel;
+    String uid,dogUUID;
 
     DatabaseReference mDatabase;
 
@@ -63,7 +67,7 @@ public class HomeFragment extends Fragment {
         ownerList = new ArrayList<OwnerProfile>();
         //    readUser();
         readFirebaseValue();
-        ownerListAdapter = new OwnerListAdapter(ownerList);
+        ownerListAdapter = new OwnerListAdapter(getContext(),ownerList);
 
         //ownerListAdapter.notifyDataSetChanged();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager( view.getContext(),
@@ -71,6 +75,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(ownerListAdapter);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+        uid = user.getUid();
+        dogUUID = UUID.randomUUID().toString();
        /* if (ownerList.get(1)!=null) {
             Toast.makeText(getContext(), ownerList.get(1) + "", Toast.LENGTH_SHORT).show();
 
@@ -93,6 +100,8 @@ public class HomeFragment extends Fragment {
         dog_breed = dialogView.findViewById(R.id.dog_breed);
         dog_walk = dialogView.findViewById(R.id.dog_walk);
         dog_addr = dialogView.findViewById(R.id.dog_addr);
+        onwerTel = dialogView.findViewById(R.id.txtOwnerTel);
+
         mDatabase =FirebaseDatabase.getInstance().getReference("list");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -107,7 +116,9 @@ public class HomeFragment extends Fragment {
                 owner.setBread(dog_breed.getText().toString());
                 owner.setWalkTime(dog_walk.getText().toString());
                 owner.setAddr(dog_addr.getText().toString());
-
+                owner.setOwnerTel(onwerTel.getText().toString());
+                owner.setUid(uid);
+                owner.setOwnerUUID(dogUUID);
                 Log.d("owner name : ", owner.getDogName().toString() );
                 Toast.makeText(getContext(),"addItem 진입",Toast.LENGTH_SHORT).show();
 
@@ -129,12 +140,12 @@ public class HomeFragment extends Fragment {
                     ownerList.clear();
                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
                         String Key = snapshot.getKey();
-
-
                         Log.d("오너 키값 확인", Key + " ");
                         OwnerProfile value = snapshot.getValue(OwnerProfile.class);
                         Log.d("오너 값 확인", value.getDogName() + " ");
-                        ownerList.add(value);
+                        if (value.isReservation()==false) {
+                            ownerList.add(value);
+                        }
                     }
                     ownerListAdapter.notifyDataSetChanged();
 

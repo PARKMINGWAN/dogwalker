@@ -140,8 +140,6 @@ public class HomeFragment2 extends Fragment {
                     walkerList.clear();
                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
                         String Key = snapshot.getKey();
-
-
                         Log.d("오너 키값 확인", Key + " ");
                         WalkerProfile value = snapshot.getValue(WalkerProfile.class);
                         Log.d("오너 값 확인", value.getWalkerName() + " ");

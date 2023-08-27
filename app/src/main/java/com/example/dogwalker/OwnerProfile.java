@@ -5,14 +5,54 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class OwnerProfile {
-    String addr;
-    String bread;
-    String dogAge;
-    String dogName;
-    String WalkTime;
+
+    String addr,bread,dogAge,dogName,WalkTime,uid,dogUUID,ownerTel;
+
+    public String getDogUUID() {
+        return dogUUID;
+    }
+
+    public void setDogUUID(String dogUUID) {
+        this.dogUUID = dogUUID;
+    }
+
+    public String getOwnerTel() {
+        return ownerTel;
+    }
+
+    public void setOwnerTel(String ownerTel) {
+        this.ownerTel = ownerTel;
+    }
+
+    boolean reservation =false;
+
+    public String getOwnerUUID() {
+        return dogUUID;
+    }
+
+    public void setOwnerUUID(String ownerUUID) {
+        this.dogUUID = ownerUUID;
+    }
+
+    public boolean isReservation() {
+        return reservation;
+    }
+
+    public void setReservation(boolean reservation) {
+        this.reservation = reservation;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     double longitude; // 위도
     double latitude; // 경도
+
 
     public double getLongitude() {
         return longitude;

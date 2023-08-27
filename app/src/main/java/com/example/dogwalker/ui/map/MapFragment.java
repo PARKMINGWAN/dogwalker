@@ -114,7 +114,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         naverMap.setLocationSource(locationSource);
 
 
-            Handler handler = new Handler();
+          /*  Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -122,7 +122,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         CreateMarker(i);
                     }
                 }
-            }, 1000);
+            }, 1000);*/
 
 
 

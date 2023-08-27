@@ -13,16 +13,26 @@
         <item name="android:src">@android:drawable/ic_input_add</item>
     </style>
 
-    <style name="fontStyle" parent="TextAppearance.AppCompat">
+    <style name="fontKey" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/pretendard</item>
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
         <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginLeft">15dp</item>
 
     </style>
 
     <style name="fontName" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/pretendard</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="fontValue" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#818181</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">10dp</item>
+
     </style>
 
     <style name="fontDefault" parent="TextAppearance.AppCompat">

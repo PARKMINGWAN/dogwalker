@@ -18,6 +18,7 @@
         android:theme="@style/Base.Theme.DogWalker"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -37,7 +38,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".WalkerDetail"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".Owner_tab"
             android:exported="true">
@@ -47,7 +57,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Walker_tab"
             android:exported="true">
@@ -65,9 +74,6 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="cxzobj9huy" />
 
-        <activity
-            android:name=".WalkerList"
-            android:exported="false" />
 
         <activity
             android:name=".HomePage"
@@ -87,7 +93,6 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>

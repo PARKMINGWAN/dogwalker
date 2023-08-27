@@ -214,19 +214,18 @@ public class OwnerMyPageFragment extends Fragment {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), OwnerDetail.class);
-                startActivity(intent);
 
-//                Log.d("btnUpdate 진입 : ", "++++++");
-//                mDatabase = FirebaseDatabase.getInstance().getReference("users");
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
-//                String uid = user.getUid();
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-//                builder.setView(dialogView);
-//                builder.setNegativeButton("취소", null);
-//                builder.setPositiveButton("수정",null);
-//                Log.d("btnUpdate dialogView : ",dialogView.toString());
+
+                Log.d("btnUpdate 진입 : ", "++++++");
+                mDatabase = FirebaseDatabase.getInstance().getReference("users");
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+                String uid = user.getUid();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setView(dialogView);
+                builder.setNegativeButton("취소", null);
+                builder.setPositiveButton("수정",null);
+                Log.d("btnUpdate dialogView : ",dialogView.toString());
 
 
 

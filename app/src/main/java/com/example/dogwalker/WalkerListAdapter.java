@@ -46,9 +46,10 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.walkerlist_profile, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
+       //.
         return myViewHolder;
     }
-/////////////////////////////////////////
+
     @Override
     public void onBindViewHolder(@NonNull WalkerListAdapter.MyViewHolder holder, int position) {
         WalkerProfile walker = walkerList.get(position);

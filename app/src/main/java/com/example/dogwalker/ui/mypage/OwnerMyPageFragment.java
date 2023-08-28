@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -242,12 +243,18 @@ public class OwnerMyPageFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setView(dialogView);
                 builder.setNegativeButton("취소", null);
-                builder.setPositiveButton("수정", null);
-                Log.d("btnUpdate dialogView : ", dialogView.toString());
+                builder.setPositiveButton("수정", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
 
 
             }
         });
+
 
 
         return view;

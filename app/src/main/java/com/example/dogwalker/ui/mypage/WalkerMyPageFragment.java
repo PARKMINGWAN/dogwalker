@@ -60,7 +60,7 @@ public class WalkerMyPageFragment extends Fragment {
 
     WalkerAdapter walkerAdapter;
     public List<Walker> walkerList;
-    Walker walker;
+    Walker walker,walker2;
     DatabaseReference mDatabase;
 
     TextView txtName, txtId, txtPwd,txtTel,txtAddr,txtCareer,txtNurture;
@@ -153,6 +153,7 @@ public class WalkerMyPageFragment extends Fragment {
             @Override
             public void onResponse(Walker value) {
                 if (value!=null) {
+                    walker2 =new Walker();
                     txtName.setText( value.getName());
                     txtId.setText( value.getId());
                     txtAddr.setText( value.getAddr());
@@ -160,11 +161,22 @@ public class WalkerMyPageFragment extends Fragment {
                     txtPwd.setText( value.getPwd());
                     txtCareer.setText(value.getCareer());
                     txtNurture.setText(value.getNurture());
+
+                    walker2.setName(value.getName());
+                    walker2.setId(value.getId());
+                    walker2.setAddr(value.getAddr());
+                    walker2.setTel(value.getTel());
+                    walker2.setCareer(value.getCareer());
+                    walker2.setNurture(value.getNurture());
+                    walker2.setPwd(value.getPwd());
+
+
                 }else {
 
                 }
             }
         });
+
         btnImgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,16 +211,16 @@ public class WalkerMyPageFragment extends Fragment {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Walker walker1 = new Walker();
-                        walker1.setAddr(etAddr.getText().toString());
-                        walker1.setTel(etTel.getText().toString());
-                        walker1.setPwd(etPwd.getText().toString());
-                        walker1.setCareer(etCareer.getText().toString());
-                        walker1.setId(etId.getText().toString());
-                        walker1.setName(etName.getText().toString());
-                        walker1.setNurture(etNurture.getSelectedItem().toString());
+                        walker = new Walker();
+                        walker.setAddr(etAddr.getText().toString());
+                        walker.setTel(etTel.getText().toString());
+                        walker.setPwd(etPwd.getText().toString());
+                        walker.setCareer(etCareer.getText().toString());
+                        walker.setId(etId.getText().toString());
+                        walker.setName(etName.getText().toString());
+                        walker.setNurture(etNurture.getSelectedItem().toString());
 
-                        mDatabase.child(uid).child("walker").setValue(walker1);
+                        mDatabase.child(uid).child("walker").setValue(walker);
 
                     }
                 });
@@ -237,18 +249,47 @@ public class WalkerMyPageFragment extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setView(dialogView);
+
+                etName.setText(walker2.getName());
+                etId.setText(walker2.getId());
+                etPwd.setText(walker2.getPwd());
+                etAddr.setText(walker2.getAddr());
+                etCareer.setText(walker2.getCareer());
+                etTel.setText(walker2.getTel());
+
                 builder.setNegativeButton("취소", null);
-                builder.setPositiveButton("수정",null);
-                Log.d("btnUpdate dialogView : ",dialogView.toString());
+                builder.setPositiveButton("수정", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                     //   etName.setText(walker2.getName());
+                        Log.d("수정 이름 : ",walker2.getName()+"");
 
+                        walker2.setAddr(etAddr.getText().toString());
+                        walker2.setTel(etTel.getText().toString());
+                        walker2.setPwd(etPwd.getText().toString());
+                        walker2.setCareer(etCareer.getText().toString());
+                        walker2.setId(etId.getText().toString());
+                        walker2.setName(etName.getText().toString());
+                        walker2.setNurture(etNurture.getSelectedItem().toString());
 
+                        mDatabase.child(uid).child("walker").setValue(walker2);
+                        txtName.setText(walker2.getName());
+                        txtAddr.setText(walker2.getAddr());
+                        txtCareer.setText(walker2.getCareer());
+                        txtPwd.setText(walker2.getPwd());
+                        txtTel.setText(walker2.getTel());
+                        txtNurture.setText(walker2.getNurture());
+
+                    }
+                });
+                builder.show();
 
             }
         });
 
-
         return view;
     }
+
 
     public interface FirebaseCallback {
         void onResponse(Walker value);
@@ -270,9 +311,5 @@ public class WalkerMyPageFragment extends Fragment {
             }
         });
     }
-
-
-
-
 
 }

@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dogwalker.ui.home.HomeFragment;
 import com.example.dogwalker.ui.mypage.WalkerMyPageFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,7 +24,6 @@ public class OwnerDetail extends AppCompatActivity {
     String dogUUID;
     TextView txtDogName, txtDogAge,txtDogWalk,txtOwnerTel,txtOwnerAddr,txtDogBread;
     DatabaseReference mDatabase;
-    Button btnApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,6 @@ public class OwnerDetail extends AppCompatActivity {
         txtDogAge=findViewById(R.id.txtDogAge);
         txtOwnerAddr=findViewById(R.id.txtAddr);
         txtOwnerTel=findViewById(R.id.txtTel);
-        btnApplication = findViewById(R.id.btnApply);
         Log.d("uuid :", dogUUID + "");
        readFirebaseValue(new FirebaseCallback() {
            @Override
@@ -57,14 +53,6 @@ public class OwnerDetail extends AppCompatActivity {
 
 
                }
-           }
-       });
-
-       btnApplication.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               Intent intent = new Intent(view.getContext(), HomeFragment.class);
-               startActivity(intent);
            }
        });
 

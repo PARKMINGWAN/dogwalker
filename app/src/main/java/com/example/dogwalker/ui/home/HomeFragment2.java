@@ -27,15 +27,12 @@ import com.example.dogwalker.WalkerProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class HomeFragment2 extends Fragment {
 
@@ -46,7 +43,6 @@ public class HomeFragment2 extends Fragment {
     TextView walker_nurture;
     RadioGroup radioGroup;
     RadioButton btn1, btn2;
-    String uid,walkerUUID;
 
     DatabaseReference mDatabase;
 
@@ -80,9 +76,6 @@ public class HomeFragment2 extends Fragment {
                 RecyclerView.VERTICAL, false);
         recyclerView2.setLayoutManager(linearLayoutManager);
         recyclerView2.setAdapter(walkerListAdapter);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
-        uid = user.getUid();
-        walkerUUID = UUID.randomUUID().toString();
 
         floatBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,9 +112,6 @@ public class HomeFragment2 extends Fragment {
                 walker.setWalkerAddr(walker_addr.getText().toString());
                 walker.setWalkerCareer(walker_career.getText().toString());
                 walker.setWalkerNurture(walker_nurture.getText().toString());
-                walker.setUid(uid);
-                walker.setWalkerUUID(walkerUUID);
-
                 radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -132,7 +122,7 @@ public class HomeFragment2 extends Fragment {
                         }
                     }
                 });
-
+                // mDatabase.child("list").child("owner").setValue(owner);
                 walkerListAdapter.addItem(walker);
 
             }

@@ -9,7 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.dogwalker.databinding.TabOwnerBinding;
-import com.example.dogwalker.ui.home.HomeFragment;
+import com.example.dogwalker.ui.home.HomeFragment2;
 import com.example.dogwalker.ui.map.MapFragment;
 import com.example.dogwalker.ui.mypage.OwnerMyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Owner_tab extends AppCompatActivity {
     private TabOwnerBinding tabOwnerBinding;
-    HomeFragment homeFragment;
+    HomeFragment2 homeFragment;
     MapFragment mapFragment;
     OwnerMyPageFragment ownerMyPageFragment;
 
@@ -38,7 +38,7 @@ public class Owner_tab extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(tabOwnerBinding.navView, navController);
 
-        homeFragment = new HomeFragment();
+        homeFragment = new HomeFragment2();
         mapFragment = new MapFragment();
         ownerMyPageFragment = new OwnerMyPageFragment();
 

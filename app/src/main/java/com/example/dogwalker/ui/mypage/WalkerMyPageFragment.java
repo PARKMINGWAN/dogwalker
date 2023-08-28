@@ -29,6 +29,7 @@ import com.example.dogwalker.FirebaseManager;
 import com.example.dogwalker.HomePage;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
+import com.example.dogwalker.WalkerMypageAdd;
 import com.example.dogwalker.Walker_tab;
 import com.example.dogwalker.R;
 import com.example.dogwalker.Walker;
@@ -68,7 +69,7 @@ public class WalkerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete;
+    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd;
     ImageView profileImg;
 
     EditText etName,etId,etPwd,etTel,etAddr,etCareer;
@@ -88,6 +89,7 @@ public class WalkerMyPageFragment extends Fragment {
         btnImgInsert = view.findViewById(R.id.btnimgInsert);
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnImgDelete = view.findViewById(R.id.btnImgDelete);
+        btnAdd = view.findViewById(R.id.btnAdd);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -170,6 +172,15 @@ public class WalkerMyPageFragment extends Fragment {
                 profileImg.setImageResource(R.drawable.default_profile);
             }
         });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), WalkerMypageAdd.class);
+                startActivity(intent);
+            }
+        });
+
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override

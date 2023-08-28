@@ -7,7 +7,7 @@
     android:background="#73E7E7E7"
     android:orientation="vertical"
     tools:context=".WalkerMypageAdd">
-<!--
+
     <ScrollView
         android:fillViewport="true"
         android:scrollbars="none"
@@ -128,7 +128,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/fontKey"
-                    android:layout_marginBottom="15dp"
                     android:layout_below="@+id/test2"
                     android:text="아이디  : " />
 
@@ -172,16 +171,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/fontKey"
+                    android:layout_below="@+id/test4"
+                    android:text="전화번호   : " />
+
+                <EditText
+                    android:id="@+id/etTel"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/test5"
+                    android:layout_alignTop="@+id/test5"
+                    android:fontFamily="@font/pretendard"
+                    android:textSize="15dp"
+                    android:paddingTop="1dp"
+                    android:paddingStart="10dp"
+                    android:hint="Tel"/>
+
+                <TextView
+                    android:id="@+id/test6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/fontKey"
                     android:layout_marginBottom="15dp"
-                    android:layout_below="@+id/test2"
+                    android:layout_below="@+id/test5"
                     android:text="주소  : " />
 
                 <EditText
                     android:id="@+id/etAddr"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/test3"
-                    android:layout_alignTop="@+id/test3"
+                    android:layout_toRightOf="@+id/test6"
+                    android:layout_alignTop="@+id/test6"
                     android:fontFamily="@font/pretendard"
                     android:textSize="15dp"
                     android:paddingTop="1dp"
@@ -199,7 +218,7 @@
                 android:background="@drawable/layout_background">
 
                 <TextView
-                    android:id="@+id/test4"
+                    android:id="@+id/test7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"/>
@@ -207,99 +226,60 @@
 
 
                 <TextView
-                    android:id="@+id/test5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_toRightOf="@+id/test4"
-                    android:layout_alignTop="@+id/test4"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/pretendard"
-                    android:text="반려견 정보"
-                    android:textColor="#818181"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/test6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="강아지 이름  : "
-                    android:layout_below="@+id/test5"
-                    style="@style/fontKey" />
-
-                <EditText
-                    android:id="@+id/etName"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/test6"
-                    android:layout_alignTop="@+id/test6"
-                    android:fontFamily="@font/pretendard"
-                    android:textSize="15dp"
-                    android:paddingTop="1dp"
-                    android:paddingStart="10dp"
-                    android:hint="Name"/>
-
-                <TextView
-                    android:id="@+id/test7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="강아지 품종  : "
-                    android:layout_below="@+id/test6"
-                    style="@style/fontKey" />
-
-                <EditText
-                    android:id="@+id/etBreed"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/test7"
-                    android:layout_alignTop="@+id/test7"
-                    android:fontFamily="@font/pretendard"
-                    android:textSize="15dp"
-                    android:paddingTop="1dp"
-                    android:paddingStart="10dp"
-                    android:hint="Breed"/>
-
-                <TextView
                     android:id="@+id/test8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="강아지 나이  : "
-                    style="@style/fontKey"
-                    android:layout_below="@+id/test7"/>
-
-                <EditText
-                    android:id="@+id/etDogAge"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/test8"
-                    android:layout_alignTop="@+id/test8"
+                    android:layout_marginStart="10dp"
+                    android:layout_toRightOf="@+id/test7"
+                    android:layout_alignTop="@+id/test7"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
                     android:fontFamily="@font/pretendard"
-                    android:textSize="15dp"
-                    android:paddingTop="1dp"
-                    android:paddingStart="10dp"
-                    android:hint="Age"/>
+                    android:text="사용자 정보"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/test9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="산책 시간  : "
-                    style="@style/fontKey"
-                    android:layout_marginBottom="15dp"
-                    android:layout_below="@+id/test8" />
+                    android:text="산책 경력  : "
+                    android:layout_below="@+id/test8"
+                    style="@style/fontKey" />
 
                 <EditText
-                    android:id="@+id/etDogWalk"
+                    android:id="@+id/etCareer"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/test9"
                     android:layout_toRightOf="@+id/test9"
+                    android:layout_alignTop="@+id/test9"
                     android:fontFamily="@font/pretendard"
                     android:textSize="15dp"
                     android:paddingTop="1dp"
                     android:paddingStart="10dp"
-                    android:hint="Time"/>
+                    android:hint="Career"/>
+
+
+                <TextView
+                    android:id="@+id/test10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="양육 유무  : "
+                    style="@style/fontKey"
+                    android:layout_marginBottom="15dp"
+                    android:layout_below="@+id/test9" />
+
+                <EditText
+                    android:id="@+id/etNurture"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/test10"
+                    android:layout_toRightOf="@+id/test10"
+                    android:fontFamily="@font/pretendard"
+                    android:textSize="15dp"
+                    android:paddingTop="1dp"
+                    android:paddingStart="10dp"
+                    android:hint="Nurture"/>
 
             </RelativeLayout>
 
@@ -312,7 +292,7 @@
 
         </LinearLayout>
 
-    </ScrollView>-->
+    </ScrollView>
 
 
 </LinearLayout>

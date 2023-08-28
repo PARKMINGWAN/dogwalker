@@ -114,6 +114,7 @@ public class HomeFragment2 extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 WalkerProfile walker = new WalkerProfile();
+
                 walker.setWalkerName(walker_name.getText().toString());
                 walker.setWalkerTel(walker_tel.getText().toString());
                 walker.setWalkerAddr(walker_addr.getText().toString());

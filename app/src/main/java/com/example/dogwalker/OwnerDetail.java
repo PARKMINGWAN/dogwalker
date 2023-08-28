@@ -16,19 +16,24 @@ import com.example.dogwalker.ui.home.HomeFragment;
 import com.example.dogwalker.ui.mypage.WalkerMyPageFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.UUID;
+
 
 public class OwnerDetail extends AppCompatActivity {
     private ProgressBar progressBar;
-    String dogUUID;
+    String dogUUID,walkerUid,walkerUUID,ownerUid;
     TextView txtDogName, txtDogAge,txtDogWalk,txtOwnerTel,txtOwnerAddr,txtDogBread;
     DatabaseReference mDatabase;
     Button btnApplication;
     WalkerProfile walkerProfile;
     ApplicationWalkerProfile applicationWalkerProfile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,9 @@ public class OwnerDetail extends AppCompatActivity {
         txtOwnerTel=findViewById(R.id.txtTel);
         btnApplication = findViewById(R.id.btnApply);
         applicationWalkerProfile = new ApplicationWalkerProfile();
+        walkerUUID = UUID.randomUUID().toString();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+        walkerUid = user.getUid();
         Log.d("uuid :", dogUUID + "");
         readFirebaseValue(new FirebaseCallback() {
             @Override
@@ -57,9 +65,30 @@ public class OwnerDetail extends AppCompatActivity {
                     txtDogAge.setText(value.getDogAge());
                     txtOwnerAddr.setText(value.getAddr());
                     txtOwnerTel.setText(value.getOwnerTel());
+                    ownerUid=value.getUid();
+
+
 
 
                 }
+            }
+        });
+
+        reaWalkerFirebaseValue(new FirebaseCallback2() {
+            @Override
+            public void onResponse(WalkerProfile value) {
+
+                applicationWalkerProfile.setUid(value.getUid());
+                applicationWalkerProfile.setWalkerAddr(value.getWalkerAddr());
+                applicationWalkerProfile.setWalkerCareer(value.getWalkerCareer());
+                applicationWalkerProfile.setWalkerTel(value.getWalkerTel());
+                applicationWalkerProfile.setWalkerName(value.getWalkerName());
+                applicationWalkerProfile.setWalkerNurture(value.getWalkerNurture());
+                applicationWalkerProfile.setWalkerUUID(walkerUUID);
+
+
+
+
             }
         });
 
@@ -67,6 +96,15 @@ public class OwnerDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), HomeFragment.class);
+
+
+                Log.d("디테일 UUID",walkerUUID+"" );
+                   Log.d("디테일 오너 UID",ownerUid+"" );
+
+                   Log.d("디테일 신청 프로필 경력 : ",applicationWalkerProfile.getWalkerCareer());
+                mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+
+
                 startActivity(intent);
             }
         });
@@ -78,7 +116,7 @@ public class OwnerDetail extends AppCompatActivity {
 
     public void reaWalkerFirebaseValue(FirebaseCallback2 callback) {
 
-        DatabaseReference uidRef = mDatabase.child("list").child("walker").child(dogUUID);
+        DatabaseReference uidRef = mDatabase.child("list").child("walker").child(walkerUid);
         uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {

@@ -244,6 +244,18 @@
                 android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:text="수정" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                style="@style/btnTextStyle"
+                android:layout_width="320dp"
+                android:backgroundTint="#011EB1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:text="추가(intent)" />
+
             <Button
                 android:id="@+id/btnimgInsert"
                 style="@style/btnTextStyle"

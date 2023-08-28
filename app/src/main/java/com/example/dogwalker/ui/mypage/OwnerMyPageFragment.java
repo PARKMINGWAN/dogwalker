@@ -1,6 +1,7 @@
 package com.example.dogwalker.ui.mypage;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public class OwnerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert;
+    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnAdd;
     ImageView profileImg;
 
     EditText etName,etId,etPwd,etTel,etAddr,etBreed, etDogAge, etDogWalk;
@@ -84,6 +85,7 @@ public class OwnerMyPageFragment extends Fragment {
         btnInsert = view.findViewById(R.id.btnInsert);
         btnImgInsert = view.findViewById(R.id.btnimgInsert);
         btnUpdate = view.findViewById(R.id.btnUpdate);
+        btnAdd = view.findViewById(R.id.btnAdd);
 
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
@@ -164,44 +166,50 @@ public class OwnerMyPageFragment extends Fragment {
             }
         });
 
-        btnInsert.setOnClickListener(new View.OnClickListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
 
                 Intent intent = new Intent(getContext(), OwnerMypageAdd.class);
                 startActivity(intent);
 
-//                mDatabase = FirebaseDatabase.getInstance().getReference("users");
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
-//                String uid = user.getUid();
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-//                builder.setView(dialogView);
-//                builder.setNegativeButton("취소", null);
-//                etId.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("email"));
-//                etPwd.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("password"));
-//
-//                builder.setPositiveButton("등록", new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Owner owner1 = new Owner();
-//                        owner1.setAddr(etAddr.getText().toString());
-//                        owner1.setTel(etTel.getText().toString());
-//                        owner1.setPwd(etPwd.getText().toString());
-//                        owner1.setBreed(etBreed.getText().toString());
-//                        owner1.setId(etId.getText().toString());
-//                        owner1.setName(etName.getText().toString());
-//                        owner1.setDog_age(etDogAge.getText().toString());
-//                        owner1.setDog_walk(etDogWalk.getText().toString());
-//
-//                        mDatabase.child(uid).child("owner").setValue(owner1);
-//
-//                    }
-//                });
-//                builder.show();
+            }
+        });
+
+
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mDatabase = FirebaseDatabase.getInstance().getReference("users");
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+                String uid = user.getUid();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setView(dialogView);
+                builder.setNegativeButton("취소", null);
+                etId.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("email"));
+                etPwd.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("password"));
+
+                builder.setPositiveButton("등록", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Owner owner1 = new Owner();
+                        owner1.setAddr(etAddr.getText().toString());
+                        owner1.setTel(etTel.getText().toString());
+                        owner1.setPwd(etPwd.getText().toString());
+                        owner1.setBreed(etBreed.getText().toString());
+                        owner1.setId(etId.getText().toString());
+                        owner1.setName(etName.getText().toString());
+                        owner1.setDog_age(etDogAge.getText().toString());
+                        owner1.setDog_walk(etDogWalk.getText().toString());
+
+                        mDatabase.child(uid).child("owner").setValue(owner1);
+
+                    }
+                });
+                builder.show();
 
             }
         });

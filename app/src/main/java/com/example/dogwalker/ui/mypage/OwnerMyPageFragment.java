@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.dogwalker.HomePage;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
+import com.example.dogwalker.MypageAdd;
 import com.example.dogwalker.Owner;
 import com.example.dogwalker.OwnerDetail;
 import com.example.dogwalker.R;
@@ -168,35 +169,38 @@ public class OwnerMyPageFragment extends Fragment {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase = FirebaseDatabase.getInstance().getReference("users");
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
-                String uid = user.getUid();
+                Intent intent = new Intent(getContext(), MypageAdd.class);
+                startActivity(intent);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setView(dialogView);
-                builder.setNegativeButton("취소", null);
-                etId.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("email"));
-                etPwd.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("password"));
-
-                builder.setPositiveButton("등록", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Owner owner1 = new Owner();
-                        owner1.setAddr(etAddr.getText().toString());
-                        owner1.setTel(etTel.getText().toString());
-                        owner1.setPwd(etPwd.getText().toString());
-                        owner1.setBreed(etBreed.getText().toString());
-                        owner1.setId(etId.getText().toString());
-                        owner1.setName(etName.getText().toString());
-                        owner1.setDog_age(etDogAge.getText().toString());
-                        owner1.setDog_walk(etDogWalk.getText().toString());
-
-                        mDatabase.child(uid).child("owner").setValue(owner1);
-
-                    }
-                });
-                builder.show();
+//                mDatabase = FirebaseDatabase.getInstance().getReference("users");
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+//                String uid = user.getUid();
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+//                builder.setView(dialogView);
+//                builder.setNegativeButton("취소", null);
+//                etId.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("email"));
+//                etPwd.setText(LoginSharedPreferencesManager.getLoginInfo(view.getContext()).get("password"));
+//
+//                builder.setPositiveButton("등록", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Owner owner1 = new Owner();
+//                        owner1.setAddr(etAddr.getText().toString());
+//                        owner1.setTel(etTel.getText().toString());
+//                        owner1.setPwd(etPwd.getText().toString());
+//                        owner1.setBreed(etBreed.getText().toString());
+//                        owner1.setId(etId.getText().toString());
+//                        owner1.setName(etName.getText().toString());
+//                        owner1.setDog_age(etDogAge.getText().toString());
+//                        owner1.setDog_walk(etDogWalk.getText().toString());
+//
+//                        mDatabase.child(uid).child("owner").setValue(owner1);
+//
+//                    }
+//                });
+//                builder.show();
 
             }
         });

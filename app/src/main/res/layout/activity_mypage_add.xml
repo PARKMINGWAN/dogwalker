@@ -193,7 +193,7 @@
                     android:textSize="15dp"
                     android:paddingTop="1dp"
                     android:paddingStart="10dp"
-                    android:hint="Breed"/>
+                    android:hint="Name"/>
 
                 <TextView
                     android:id="@+id/test7"
@@ -254,7 +254,7 @@
                     android:textSize="15dp"
                     android:paddingTop="1dp"
                     android:paddingStart="10dp"
-                    android:hint="DogWalk"/>
+                    android:hint="Time"/>
 
             </RelativeLayout>
 

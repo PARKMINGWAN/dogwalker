@@ -27,6 +27,8 @@ public class OwnerDetail extends AppCompatActivity {
     TextView txtDogName, txtDogAge,txtDogWalk,txtOwnerTel,txtOwnerAddr,txtDogBread;
     DatabaseReference mDatabase;
     Button btnApplication;
+    WalkerProfile walkerProfile;
+    ApplicationWalkerProfile applicationWalkerProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class OwnerDetail extends AppCompatActivity {
         txtOwnerAddr=findViewById(R.id.txtAddr);
         txtOwnerTel=findViewById(R.id.txtTel);
         btnApplication = findViewById(R.id.btnApply);
+        applicationWalkerProfile = new ApplicationWalkerProfile();
         Log.d("uuid :", dogUUID + "");
         readFirebaseValue(new FirebaseCallback() {
             @Override
@@ -69,6 +72,26 @@ public class OwnerDetail extends AppCompatActivity {
         });
 
     }
+    public interface FirebaseCallback2 {
+        void onResponse(WalkerProfile value);
+    }
+
+    public void reaWalkerFirebaseValue(FirebaseCallback2 callback) {
+
+        DatabaseReference uidRef = mDatabase.child("list").child("walker").child(dogUUID);
+        uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    WalkerProfile value = task.getResult().getValue(WalkerProfile.class);
+                    callback.onResponse(value);
+                } else {
+
+                }
+            }
+        });
+    }
 
     public interface FirebaseCallback {
         void onResponse(OwnerProfile value);
@@ -89,7 +112,5 @@ public class OwnerDetail extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 }

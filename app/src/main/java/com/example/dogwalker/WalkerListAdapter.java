@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,6 +21,7 @@ import java.util.List;
 
 public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.MyViewHolder> {
     DatabaseReference mDatabase;
+    String uid;
     private List<WalkerProfile> walkerList;
 
     public WalkerListAdapter(List<WalkerProfile> walkerList) {
@@ -35,7 +38,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         //Toast.makeText(,Toast.LENGTH_SHORT).show();
         mDatabase = FirebaseDatabase.getInstance().getReference("list");
         walkerList.add(walkerProfile);
-        mDatabase.child("walker").push().setValue(walkerProfile);
+       mDatabase.child("walker").child(uid).setValue(walkerProfile);
         notifyDataSetChanged();
 
     }
@@ -46,7 +49,8 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.walkerlist_profile, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
-       //.
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+        uid = user.getUid();
         return myViewHolder;
     }
 

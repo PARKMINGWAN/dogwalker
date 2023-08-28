@@ -1,6 +1,8 @@
 package com.example.dogwalker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.MapFragment;
+import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
+import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.util.FusedLocationSource;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -25,7 +34,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
-public class OwnerMypageAdd extends AppCompatActivity {
+public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallback {
     List<OwnerProfile> ownerList;
     private ProgressBar progressBar;
     Button btnInfoInsert, btnImgInsert;
@@ -37,6 +46,14 @@ public class OwnerMypageAdd extends AppCompatActivity {
     private OwnerListAdapter ownerListAdapter;
     OwnerProfile ownerProfile;
     String dogUUID,uid;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
+    private static final String[] PERMISSIONS = {
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+    };
+    private FusedLocationSource locationSource;
+    NaverMap naverMap;
 
     @Override
     public void onResume() {
@@ -92,7 +109,25 @@ public class OwnerMypageAdd extends AppCompatActivity {
             }
         });
 
+        NaverMapOptions options = new NaverMapOptions()
+                .camera(new CameraPosition(new LatLng(35.1561411, 129.0594806), 12));
 
+        FragmentManager fm = getSupportFragmentManager();
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            mapFragment = MapFragment.newInstance();
+            fm.beginTransaction().add(R.id.map, mapFragment).commit();
+        }
+
+        mapFragment.getMapAsync(this);
+
+        locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        this.naverMap = naverMap;
+        naverMap.setLocationSource(locationSource);
     }
 
     public void addItem(OwnerProfile ownerProfile) {
@@ -172,5 +207,4 @@ public class OwnerMypageAdd extends AppCompatActivity {
         }
 
     }
-
 }

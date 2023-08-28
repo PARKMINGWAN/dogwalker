@@ -24,6 +24,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.dogwalker.ApplicationList;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
 import com.example.dogwalker.OwnerMypageAdd;
@@ -60,17 +61,16 @@ public class OwnerMyPageFragment extends Fragment {
     Walker walker;
     DatabaseReference mDatabase;
 
-    TextView txtName, txtId, txtPwd,txtTel,txtAddr,txtBreed,txtDogAge, txtDogWalk;
+    TextView txtName, txtId, txtPwd, txtTel, txtAddr, txtBreed, txtDogAge, txtDogWalk;
     String name, id, pwd, tel, addr, breed, dogage, dogwalk;
     String uid;
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnAdd;
+    Button btnImgInsert, btnUpdate, btnLogout, btnInsert, btnAdd, btnReservation;
     ImageView profileImg;
 
-    EditText etName,etId,etPwd,etTel,etAddr,etBreed, etDogAge, etDogWalk;
-
+    EditText etName, etId, etPwd, etTel, etAddr, etBreed, etDogAge, etDogWalk;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -86,7 +86,7 @@ public class OwnerMyPageFragment extends Fragment {
         btnImgInsert = view.findViewById(R.id.btnimgInsert);
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnAdd = view.findViewById(R.id.btnAdd);
-
+        btnReservation = view.findViewById(R.id.btnReservation);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -95,7 +95,6 @@ public class OwnerMyPageFragment extends Fragment {
         txtBreed = view.findViewById(R.id.txtBreed);
         txtDogAge = view.findViewById(R.id.txtDogAge);
         txtDogWalk = view.findViewById(R.id.txtDogWalk);
-
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
@@ -139,7 +138,13 @@ public class OwnerMyPageFragment extends Fragment {
         etDogAge = dialogView.findViewById(R.id.etDogAge);
         etDogWalk = dialogView.findViewById(R.id.etDogWalk);
 
-
+        btnReservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+ Intent intent = new Intent(view.getContext(), ApplicationList.class);
+ startActivity(intent);
+            }
+        });
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,16 +156,16 @@ public class OwnerMyPageFragment extends Fragment {
         readFirebaseValue(new FirebaseCallback() {
             @Override
             public void onResponse(Owner value) {
-                if (value!=null) {
-                    txtName.setText( value.getName());
+                if (value != null) {
+                    txtName.setText(value.getName());
                     txtId.setText(value.getId());
-                    txtAddr.setText( value.getAddr());
-                    txtTel.setText( value.getTel());
-                    txtPwd.setText( value.getPwd());
+                    txtAddr.setText(value.getAddr());
+                    txtTel.setText(value.getTel());
+                    txtPwd.setText(value.getPwd());
                     txtBreed.setText(value.getBreed());
                     txtDogAge.setText(value.getDog_age());
                     txtDogWalk.setText(value.getDog_walk());
-                }else {
+                } else {
 
                 }
             }
@@ -237,9 +242,8 @@ public class OwnerMyPageFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setView(dialogView);
                 builder.setNegativeButton("취소", null);
-                builder.setPositiveButton("수정",null);
-                Log.d("btnUpdate dialogView : ",dialogView.toString());
-
+                builder.setPositiveButton("수정", null);
+                Log.d("btnUpdate dialogView : ", dialogView.toString());
 
 
             }
@@ -250,9 +254,7 @@ public class OwnerMyPageFragment extends Fragment {
     }
 
 
-
-    private void fireBaseImgUpload()
-    {
+    private void fireBaseImgUpload() {
         if (imgUrl == null) {
             return;
         }
@@ -264,7 +266,7 @@ public class OwnerMyPageFragment extends Fragment {
         String fileName = "IMG_" + sdf.format(new Date()) + ".jpg";
 
         //저장할 파일 위치에 대한 참조객체
-        StorageReference imgRef = firebaseStorage.getReference(uid +"/"+ fileName); //저장할 이름
+        StorageReference imgRef = firebaseStorage.getReference(uid + "/" + fileName); //저장할 이름
         //폴더가 없으면 만들고 있으면 그냥 참조한다
 
         //위 저장 경로 참조객체에게 실제파일 업로드 시키기
@@ -297,6 +299,7 @@ public class OwnerMyPageFragment extends Fragment {
     public interface FirebaseCallback {
         void onResponse(Owner value);
     }
+
     public void readFirebaseValue(FirebaseCallback callback) {
 
         DatabaseReference uidRef = mDatabase.child(uid).child("owner");
@@ -313,16 +316,17 @@ public class OwnerMyPageFragment extends Fragment {
             }
         });
     }
+
     private void fireBaseImgLoad(ImageView imageView, Context context, String path) {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
         StorageReference imgRef = storageReference.child(uid);
-        Toast.makeText(getContext(),"imgRef",Toast.LENGTH_SHORT).show();
-        if(imgRef != null) {
+        Toast.makeText(getContext(), "imgRef", Toast.LENGTH_SHORT).show();
+        if (imgRef != null) {
             imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    Toast.makeText(getContext(),"사진불러오기 성공",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "사진불러오기 성공", Toast.LENGTH_SHORT).show();
                     Glide.with(context)
                             .load(storageReference)
                             .into(imageView);
@@ -332,8 +336,6 @@ public class OwnerMyPageFragment extends Fragment {
             });
         }
     }
-
-
 
 
 }

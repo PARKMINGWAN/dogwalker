@@ -22,233 +22,203 @@
             android:layout_marginBottom="40dp"
             android:padding="20dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgProfile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        app:civ_border_color="@color/white"
-        android:layout_gravity="center"
-        app:civ_border_overlay="true"
-        app:civ_border_width="7dp"
-        android:src="@drawable/default_profile"
-        />
-
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="강아지 이름"
-            style="@style/fontName" />
-
-        <Button
-            android:id="@+id/btnApply"
-            style="@style/btnTextStyle"
-            android:backgroundTint="#011EB1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:text="신청하기" />
-
-
-        <RelativeLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/layout_background">
-
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:civ_border_color="@color/white"
+                android:layout_gravity="center"
+                app:civ_border_overlay="true"
+                app:civ_border_width="7dp"
+                android:src="@drawable/default_profile" />
 
             <TextView
-                android:id="@+id/test0"
+                android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"/>
+                android:layout_gravity="center"
+                android:text="강아지 이름"
+                style="@style/fontName" />
 
-
-
-            <TextView
-                android:id="@+id/test1"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btnApply"
+                style="@style/btnTextStyle"
+                android:backgroundTint="#011EB1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@+id/test0"
-                android:layout_alignTop="@+id/test0"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/pretendard"
-                android:text="반려인 정보"
-                android:textColor="#818181"
-                android:textSize="12sp" />
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:text="신청하기" />
+
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_background">
 
 
                 <TextView
-                    android:id="@+id/test2"
+                    android:id="@+id/test0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/test1"
-                    style="@style/fontKey"
-                    android:text="전화번호  :  " />
+                    android:layout_marginRight="5dp"/>
+
+
 
                 <TextView
-                    android:id="@+id/txtTel"
+                    android:id="@+id/test1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/test2"
-                    android:layout_alignTop="@+id/test2"
+                    android:layout_marginStart="10dp"
+                    android:layout_toRightOf="@+id/test0"
+                    android:layout_alignTop="@+id/test0"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/pretendard"
+                    android:text="반려인 정보"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+
+
+                    <TextView
+                        android:id="@+id/test2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/test1"
+                        style="@style/fontKey"
+                        android:text="전화번호  :  " />
+
+                    <TextView
+                        android:id="@+id/txtTel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/test2"
+                        android:layout_alignTop="@+id/test2"
+                        style="@style/fontDefault"
+                        android:text="010-2222-3333"/>
+
+                    <TextView
+                        android:id="@+id/test3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/fontKey"
+                        android:layout_marginBottom="15dp"
+                        android:layout_below="@+id/test2"
+                        android:text="주소  :  " />
+
+                    <TextView
+                        android:id="@+id/txtAddr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/test3"
+                        android:layout_alignTop="@+id/test3"
+                        style="@style/fontValue"
+                        android:text="111111"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layout_background">
+
+                <TextView
+                    android:id="@+id/test4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"/>
+
+
+
+                <TextView
+                    android:id="@+id/test5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toRightOf="@+id/test4"
+                    android:layout_alignTop="@+id/test4"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/pretendard"
+                    android:text="반려견 정보"
+                    android:textColor="#818181"
+                    android:textSize="12sp" />
+
+
+
+                <TextView
+                    android:id="@+id/test6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="강아지 품종  :  "
+                    android:layout_below="@+id/test5"
+                    style="@style/fontKey" />
+
+
+                <TextView
+                    android:id="@+id/txtBreed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/test6"
+                    android:layout_alignTop="@+id/test6"
                     style="@style/fontDefault"
-                    android:text="010-2222-3333"/>
-
-                <TextView
-                    android:id="@+id/test3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/fontKey"
-                    android:layout_marginBottom="15dp"
-                    android:layout_below="@+id/test2"
-                    android:text="주소  :  " />
-
-                <TextView
-                    android:id="@+id/txtAddr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/test3"
-                    android:layout_alignTop="@+id/test3"
-                    style="@style/fontValue"
                     android:text="111111"/>
 
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/test7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="강아지 나이  :  "
+                    style="@style/fontKey"
+                    android:layout_below="@+id/test6"/>
 
-        <RelativeLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/layout_background">
+                <TextView
+                    android:id="@+id/txtDogAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/test7"
+                    android:layout_alignTop="@+id/test7"
+                    style="@style/fontDefault"
+                    android:text="111111"/>
 
-            <TextView
-                android:id="@+id/test4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"/>
+                <TextView
+                    android:id="@+id/test8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="산책 시간  :  "
+                    style="@style/fontKey"
+                    android:layout_marginBottom="15dp"
+                    android:layout_below="@+id/test7" />
 
+                <TextView
+                    android:id="@+id/txtDogWalk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/test8"
+                    android:layout_toRightOf="@+id/test8"
+                    style="@style/fontDefault"
+                    android:text="111111"/>
 
-
-            <TextView
-                android:id="@+id/test5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@+id/test4"
-                android:layout_alignTop="@+id/test4"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/pretendard"
-                android:text="반려견 정보"
-                android:textColor="#818181"
-                android:textSize="12sp" />
-
-
-
-            <TextView
-                android:id="@+id/test6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="강아지 품종  :  "
-                android:layout_below="@+id/test5"
-                style="@style/fontKey" />
+            </RelativeLayout>
 
 
-            <TextView
-                android:id="@+id/txtBreed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/test6"
-                android:layout_alignTop="@+id/test6"
-                style="@style/fontDefault"
-                android:text="111111"/>
 
-
-            <TextView
-                android:id="@+id/test7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="강아지 나이  :  "
-                style="@style/fontKey"
-                android:layout_below="@+id/test6"/>
-
-            <TextView
-                android:id="@+id/txtDogAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/test7"
-                android:layout_alignTop="@+id/test7"
-                style="@style/fontDefault"
-                android:text="111111"/>
-
-            <TextView
-                android:id="@+id/test8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="산책 시간  :  "
-                style="@style/fontKey"
-                android:layout_marginBottom="15dp"
-                android:layout_below="@+id/test7" />
-
-            <TextView
-                android:id="@+id/txtDogWalk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/test8"
-                android:layout_toRightOf="@+id/test8"
-                style="@style/fontDefault"
-                android:text="111111"/>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/layout_background"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp">
-
-          <!--  <FrameLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:id="@+id/fragment_map_container"
-                tools:context=".ui.map.OwnerMapFragment">
-
-                <androidx.fragment.app.FragmentContainerView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/map"
-                    android:name="com.naver.maps.map.MapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:navermap_latitude="35.1568154"
-                    app:navermap_longitude="129.0554875"
-                    app:navermap_zoom="12"
-                    app:navermap_mapType="Terrain" />
-
-
-            </FrameLayout>-->
-
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/map"
+                android:name="com.naver.maps.map.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:navermap_latitude="35.1568154"
+                app:navermap_longitude="129.0554875"
+                app:navermap_zoom="12" />
         </LinearLayout>
 
     </ScrollView>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.dogwalker.ui.home.HomeFragment;
 import com.example.dogwalker.ui.mypage.WalkerMyPageFragment;
@@ -21,11 +22,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.MapFragment;
+import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
+import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.UUID;
 
 
-public class OwnerDetail extends AppCompatActivity {
+public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback {
     private ProgressBar progressBar;
     String dogUUID,walkerUid,walkerUUID,ownerUid;
     TextView txtDogName, txtDogAge,txtDogWalk,txtOwnerTel,txtOwnerAddr,txtDogBread;
@@ -34,13 +42,20 @@ public class OwnerDetail extends AppCompatActivity {
     WalkerProfile walkerProfile;
     ApplicationWalkerProfile applicationWalkerProfile;
 
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
+    private static final String[] PERMISSIONS = {
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+    };
+    private FusedLocationSource locationSource;
+    NaverMap naverMap;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_owner);
-        progressBar = findViewById(R.id.progress_bar);
-        progressBar.setVisibility(View.INVISIBLE);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();
         dogUUID = intent.getStringExtra("dogUUID");
@@ -109,7 +124,28 @@ public class OwnerDetail extends AppCompatActivity {
             }
         });
 
+        NaverMapOptions options = new NaverMapOptions()
+                .camera(new CameraPosition(new LatLng(35.1561411, 129.0594806), 12));
+
+        FragmentManager fm = getSupportFragmentManager();
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            mapFragment = MapFragment.newInstance();
+            fm.beginTransaction().add(R.id.map, mapFragment).commit();
+        }
+
+        mapFragment.getMapAsync(this);
+
+        locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+
     }
+
+    @Override
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        this.naverMap = naverMap;
+        naverMap.setLocationSource(locationSource);
+    }
+
     public interface FirebaseCallback2 {
         void onResponse(WalkerProfile value);
     }

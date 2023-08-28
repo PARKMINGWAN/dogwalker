@@ -34,7 +34,6 @@ import java.util.UUID;
 
 public class HomeFragment extends Fragment {
     List<OwnerProfile> ownerList;
-
     private OwnerListAdapter ownerListAdapter;
     EditText dog_name, dog_age, dog_breed, dog_walk, dog_addr ,onwerTel;
     String uid,dogUUID;
@@ -44,7 +43,6 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
 
     }
-
 
     @Override
     public void onResume() {
@@ -62,7 +60,6 @@ public class HomeFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        FloatingActionButton floatBtn = view.findViewById(R.id.floatBtn);
 
         ownerList = new ArrayList<OwnerProfile>();
         //    readUser();
@@ -82,12 +79,7 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), ownerList.get(1) + "", Toast.LENGTH_SHORT).show();
 
         }*/
-        floatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addContact();
-            }
-        });
+
 
         return view;
     }

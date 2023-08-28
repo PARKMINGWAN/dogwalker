@@ -22,19 +22,60 @@
             android:layout_marginBottom="40dp"
             android:padding="20dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfile"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:civ_border_color="@color/white"
-                android:layout_gravity="center"
-                app:civ_border_overlay="true"
-                app:civ_border_width="7dp"
-                android:src="@drawable/default_profile"
-                />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    app:civ_border_color="@color/white"
+                    android:layout_gravity="center"
+                    app:civ_border_overlay="true"
+                    app:civ_border_width="7dp"
+                    android:src="@drawable/default_profile"
+                    />
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="35dp">
+
+
+
+                    <Button
+                        android:id="@+id/btnInfoInsert"
+                        style="@style/btnTextStyle"
+                        android:backgroundTint="#011EB1"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:text="정보 추가" />
+
+
+                    <Button
+                        android:id="@+id/btnImgInsert"
+                        style="@style/btnTextStyle"
+                        android:backgroundTint="#011EB1"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:text="이미지 추가" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_marginTop="10dp"
@@ -142,7 +183,6 @@
                     android:layout_below="@+id/test5"
                     style="@style/fontKey" />
 
-
                 <EditText
                     android:id="@+id/txtName"
                     android:layout_width="200dp"
@@ -155,8 +195,6 @@
                     android:paddingStart="10dp"
                     android:hint="Breed"/>
 
-
-
                 <TextView
                     android:id="@+id/test7"
                     android:layout_width="wrap_content"
@@ -164,7 +202,6 @@
                     android:text="강아지 품종  : "
                     android:layout_below="@+id/test6"
                     style="@style/fontKey" />
-
 
                 <EditText
                     android:id="@+id/txtBreed"
@@ -177,9 +214,6 @@
                     android:paddingTop="1dp"
                     android:paddingStart="10dp"
                     android:hint="Breed"/>
-
-
-
 
                 <TextView
                     android:id="@+id/test8"
@@ -224,31 +258,6 @@
 
             </RelativeLayout>
 
-
-
-            <Button
-                android:id="@+id/btnInsert"
-                style="@style/btnTextStyle"
-                android:backgroundTint="#011EB1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:text="추가하기" />
-
-
-            <Button
-                android:id="@+id/btnImgInsert"
-                style="@style/btnTextStyle"
-                android:backgroundTint="#011EB1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="이미지 추가" />
-
-
-
-
             <ProgressBar
                 android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
@@ -259,7 +268,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-
 
 </LinearLayout>

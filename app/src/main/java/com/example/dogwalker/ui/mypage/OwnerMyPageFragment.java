@@ -30,6 +30,7 @@ import com.example.dogwalker.Owner;
 import com.example.dogwalker.R;
 import com.example.dogwalker.Walker;
 import com.example.dogwalker.WalkerAdapter;
+import com.example.dogwalker.databinding.FragmentOwnerMypageBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#73E7E7E7"
     android:orientation="vertical"
-    tools:context=".MypageAdd">
+    tools:context=".OwnerMypageAdd">
 
     <ScrollView
         android:fillViewport="true"

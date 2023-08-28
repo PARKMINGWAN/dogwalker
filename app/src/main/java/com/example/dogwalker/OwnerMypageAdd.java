@@ -1,9 +1,6 @@
 package com.example.dogwalker;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,11 +12,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.example.dogwalker.ui.mypage.OwnerMyPageFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,7 +25,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
-public class MypageAdd extends AppCompatActivity {
+public class OwnerMypageAdd extends AppCompatActivity {
     List<OwnerProfile> ownerList;
     private ProgressBar progressBar;
     Button btnInfoInsert, btnImgInsert;
@@ -53,7 +47,7 @@ public class MypageAdd extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mypage_add);
+        setContentView(R.layout.owner_mypage_add);
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.INVISIBLE);
         mDatabase = FirebaseDatabase.getInstance().getReference();

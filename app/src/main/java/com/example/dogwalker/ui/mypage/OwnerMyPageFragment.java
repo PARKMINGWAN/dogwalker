@@ -1,7 +1,6 @@
 package com.example.dogwalker.ui.mypage;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,13 +25,11 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
-import com.example.dogwalker.MypageAdd;
+import com.example.dogwalker.OwnerMypageAdd;
 import com.example.dogwalker.Owner;
-import com.example.dogwalker.OwnerProfile;
 import com.example.dogwalker.R;
 import com.example.dogwalker.Walker;
 import com.example.dogwalker.WalkerAdapter;
-import com.example.dogwalker.databinding.FragmentOwnerMypageBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -172,7 +169,7 @@ public class OwnerMyPageFragment extends Fragment {
 
 
 
-                Intent intent = new Intent(getContext(), MypageAdd.class);
+                Intent intent = new Intent(getContext(), OwnerMypageAdd.class);
                 startActivity(intent);
 
 //                mDatabase = FirebaseDatabase.getInstance().getReference("users");

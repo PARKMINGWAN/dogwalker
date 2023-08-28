@@ -54,9 +54,7 @@ public class WalkerMypageAdd extends AppCompatActivity {
         btnInfoInsert = findViewById(R.id.btnInfoInsert);
 
         etName = findViewById(R.id.etName);
-        etId = findViewById(R.id.etId);
         etAddr = findViewById(R.id.etAddr);
-        etPwd = findViewById(R.id.etPwd);
         etCareer = findViewById(R.id.etCareer);
         etNurture = findViewById(R.id.etNurture);
         etTel = findViewById(R.id.etTel);
@@ -65,14 +63,10 @@ public class WalkerMypageAdd extends AppCompatActivity {
         uid = user.getUid();
         dogUUID = UUID.randomUUID().toString();
 
+
         btnInfoInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-
 
 
 

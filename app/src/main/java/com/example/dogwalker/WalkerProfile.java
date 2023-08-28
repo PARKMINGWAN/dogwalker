@@ -6,6 +6,25 @@ public class WalkerProfile {
     String walkerNurture;
     String walkerCareer;
     String walkerTel;
+    String Uid;
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        this.Uid = uid;
+    }
+
+    public String getWalkerUUID() {
+        return WalkerUUID;
+    }
+
+    public void setWalkerUUID(String walkerUUID) {
+        this.WalkerUUID = walkerUUID;
+    }
+
+    String WalkerUUID;
 
     public WalkerProfile(String walkerName, String walkerAddr, String walkerNurture, String walkerCareer, String walkerTel) {
         this.walkerName = walkerName;

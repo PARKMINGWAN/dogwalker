@@ -106,9 +106,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
+        readFirebaseValue();
+
         InfoWindow infoWindow = new InfoWindow();
-
-
 
         this.naverMap = naverMap;
         naverMap.setLocationSource(locationSource);

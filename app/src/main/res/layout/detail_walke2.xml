@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#73E7E7E7"
     android:orientation="vertical"
-    tools:context=".WalkerDetail">
+    tools:context=".WalkerDetail2">
 
     <ScrollView
         android:fillViewport="true"
@@ -220,25 +220,17 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp">
 
-                <Button
-                    android:id="@+id/btnApproval"
-                    style="@style/btnTextStyle"
-                    android:backgroundTint="#011EB1"
-                    android:layout_width="170dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="승인하기" />
-
 
 
                 <Button
-                    android:id="@+id/btnComplete"
+                    android:id="@+id/btnWalkerComplete"
                     style="@style/btnTextStyle"
                     android:backgroundTint="#011EB1"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="인수완료" />
+                    android:text="워커 인수완료" />
+
 
                 <Button
                     android:id="@+id/btnCancle"
@@ -260,27 +252,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp">
 
-                <!--  <FrameLayout
-                      xmlns:android="http://schemas.android.com/apk/res/android"
-                      xmlns:tools="http://schemas.android.com/tools"
-                      android:layout_width="wrap_content"
-                      android:layout_height="200dp"
-                      android:id="@+id/fragment_map_container"
-                      tools:context=".ui.map.OwnerMapFragment">
-
-                      <androidx.fragment.app.FragmentContainerView
-                          xmlns:app="http://schemas.android.com/apk/res-auto"
-                          android:id="@+id/map"
-                          android:name="com.naver.maps.map.MapFragment"
-                          android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          app:navermap_latitude="35.1568154"
-                          app:navermap_longitude="129.0554875"
-                          app:navermap_zoom="12"
-                          app:navermap_mapType="Terrain" />
-
-
-                  </FrameLayout>-->
 
             </LinearLayout>
 

@@ -25,11 +25,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.dogwalker.ApplicationList;
+import com.example.dogwalker.ApplicationWalkerList;
 import com.example.dogwalker.FirebaseManager;
 import com.example.dogwalker.HomePage;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
-import com.example.dogwalker.Owner_tab;
 import com.example.dogwalker.WalkerMypageAdd;
 import com.example.dogwalker.Walker_tab;
 import com.example.dogwalker.R;
@@ -72,7 +73,7 @@ public class WalkerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd,btnReservation,btnOwner;
+    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd,btnReservation;
     ImageView profileImg;
 
     EditText etName,etId,etPwd,etTel,etAddr,etCareer;
@@ -94,7 +95,6 @@ public class WalkerMyPageFragment extends Fragment {
         btnImgDelete = view.findViewById(R.id.btnImgDelete);
         btnAdd = view.findViewById(R.id.btnAdd);
         btnReservation =view.findViewById(R.id.btnReservation);
-        btnOwner = view.findViewById(R.id.btnOwner);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -102,15 +102,6 @@ public class WalkerMyPageFragment extends Fragment {
         txtAddr = view.findViewById(R.id.txtAddr);
         txtCareer = view.findViewById(R.id.txtCareer);
         txtNurture = view.findViewById(R.id.txtNurture);
-
-        btnOwner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Owner_tab.class);
-                startActivity(intent);
-
-            }
-        });
 
 
 
@@ -156,6 +147,15 @@ public class WalkerMyPageFragment extends Fragment {
         etNurture = dialogView.findViewById(R.id.etNurture);
 
 
+
+
+        btnReservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ApplicationWalkerList.class);
+                startActivity(intent);
+            }
+        });
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -275,7 +275,7 @@ public class WalkerMyPageFragment extends Fragment {
                 builder.setPositiveButton("수정", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                     //   etName.setText(walker2.getName());
+                        //   etName.setText(walker2.getName());
                         Log.d("수정 이름 : ",walker2.getName()+"");
 
                         walker2.setAddr(etAddr.getText().toString());

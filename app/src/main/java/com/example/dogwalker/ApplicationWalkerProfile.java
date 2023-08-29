@@ -9,7 +9,16 @@ public class ApplicationWalkerProfile {
     String Uid;
     String isReservation;
 
+    String ownerUID;
     String dogName;
+
+    public String getOwnerUID() {
+        return ownerUID;
+    }
+
+    public void setOwnerUID(String ownerUID) {
+        this.ownerUID = ownerUID;
+    }
 
     String dogUUID;
 

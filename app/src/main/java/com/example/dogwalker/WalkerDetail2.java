@@ -28,14 +28,18 @@ public class WalkerDetail2 extends AppCompatActivity {
     ApplicationWalkerProfile applicationWalkerProfile , applicationWalkerProfileWalker;
     TextView txtWalkerTel, txtWalkerAddr, txtWalkerName,txtWalkerCareer ,txtWalkerNurtuer,txtDay,txtCompleteDay;
 
+
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_walke2);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Intent intent = getIntent();
+         intent = getIntent();
+        applicationWalkerProfileWalker = new ApplicationWalkerProfile();
         walkerUUID = intent.getStringExtra("walkerUUID");
         ownerUid = intent.getStringExtra("onwerUid");
+        walkerUid =intent.getStringExtra("walkerUid");
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.INVISIBLE);
         txtWalkerAddr = findViewById(R.id.txtAddr);
@@ -52,16 +56,15 @@ public class WalkerDetail2 extends AppCompatActivity {
         txtCompleteDay.setVisibility(View.GONE);
         btnWalkerComplete.setVisibility(View.GONE);
         applicationWalkerProfile = new ApplicationWalkerProfile();
-        applicationWalkerProfileWalker = new ApplicationWalkerProfile();
 
 
         btnCancel = findViewById(R.id.btnCancle);
 
 
-        Log.d("워커 디테일 오너 uid : ", ownerUid + "");
-        Log.d("워커 디테일 워커 uuid : ", walkerUUID + "");
 
-        readWalkerProfileFirebaseValue(new FirebaseCallback() {
+
+
+         readWalkerProfileFirebaseValue(new FirebaseCallback() {
             @Override
             public void onResponse(ApplicationWalkerProfile value) {
                 if (value != null) {
@@ -75,59 +78,54 @@ public class WalkerDetail2 extends AppCompatActivity {
                     txtWalkerCareer.setText(value.getWalkerCareer());
                     walkerUid = value.getUid();
                     Log.d("워커디테일 워커 uid : ", walkerUid + "");
+
+
+                    if (value.getIsReservation().equals("0")) //워커가 오너한테 신청 오너가 수락 단계
+                    {
+
+                        btnCancel.setVisibility(View.VISIBLE);
+                        btnWalkerComplete.setVisibility(View.GONE);
+                    } else if (value.getIsReservation().equals("1"))//워커가 인수 인계 하는 단계 산책중으로 넘어감
+                    {
+                        btnWalkerComplete.setVisibility(View.VISIBLE);
+
+                        btnCancel.setVisibility(View.VISIBLE);
+
+                    } else if (value.getIsReservation().equals("2"))//오너가 인수인계 하는 단계 산책완료로 넘어감
+                    {
+
+                        btnCancel.setVisibility(View.GONE);
+                        txtDay.setVisibility(View.GONE);
+                        txtCompleteDay.setVisibility(View.GONE);
+                    } else if (value.getIsReservation().equals("3")) {
+
+                        btnCancel.setVisibility(View.GONE);
+                        txtDay.setVisibility(View.VISIBLE);
+                        txtCompleteDay.setVisibility(View.GONE);
+                    }
+
+                    btnWalkerComplete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            applicationWalkerProfile.setIsReservation("2");//인수인계완료
+                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                            Date date = new Date(System.currentTimeMillis());
+                            applicationWalkerProfile.setCompleteDay(formatter.format(date).toString());
+                            txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
+                            mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+                            mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+                            finish();
+                        }
+                    });
                 }
-
-                if (value.getIsReservation().equals("0")) //워커가 오너한테 신청 오너가 수락 단계
-                {
-
-                    btnCancel.setVisibility(View.VISIBLE);
-
-                    btnWalkerComplete.setVisibility(View.GONE);
-                } else if (value.getIsReservation().equals("1"))//워커가 인수 인계 하는 단계 산책중으로 넘어감
-                {
-                    btnWalkerComplete.setVisibility(View.VISIBLE);
-
-                    btnCancel.setVisibility(View.VISIBLE);
-
-                } else if (value.getIsReservation().equals("2"))//오너가 인수인계 하는 단계 산책완료로 넘어감
-                {
-
-                    btnCancel.setVisibility(View.GONE);
-                    txtDay.setVisibility(View.GONE);
-                    txtCompleteDay.setVisibility(View.GONE);
-                } else if (value.getIsReservation().equals("3")) {
-
-                    btnCancel.setVisibility(View.GONE);
-                    txtDay.setVisibility(View.VISIBLE);
-                    txtCompleteDay.setVisibility(View.GONE);
-                }
-
-
             }
+
 
         });
 
 
-        readProfileFirebaseValue(new FirebaseCallback() {
-            @Override
-            public void onResponse(ApplicationWalkerProfile value) {
-                applicationWalkerProfileWalker = value;
 
-            }
-        });
 
-        btnWalkerComplete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                applicationWalkerProfile.setIsReservation("2");//인수인계완료
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-                Date date = new Date(System.currentTimeMillis());
-                applicationWalkerProfile.setCompleteDay(formatter.format(date).toString());
-                txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
-                mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
-                finish();
-            }
-        });
 
 
     }
@@ -138,7 +136,7 @@ public class WalkerDetail2 extends AppCompatActivity {
 
     public void readWalkerProfileFirebaseValue(FirebaseCallback callback) {
 
-        DatabaseReference uidRef = mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID);
+        DatabaseReference uidRef = mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID);
         uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -154,7 +152,7 @@ public class WalkerDetail2 extends AppCompatActivity {
     }
     public void readProfileFirebaseValue(FirebaseCallback callback) {
 
-        DatabaseReference uidRef = mDatabase.child("ApplicationList").child(applicationWalkerProfile.getUid()).child(walkerUUID);
+        DatabaseReference uidRef = mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID);
         uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {

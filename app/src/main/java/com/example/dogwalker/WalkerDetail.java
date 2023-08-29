@@ -27,7 +27,7 @@ public class WalkerDetail extends AppCompatActivity {
     Button btnApplication,btnCancel,btnComplete;
     DatabaseReference mDatabase;
     ApplicationWalkerProfile applicationWalkerProfile , applicationWalkerProfileWalker;
-    TextView txtWalkerTel, txtWalkerAddr, txtWalkerName,txtWalkerCareer ,txtWalkerNurtuer,txtDay,txtCompleteDay;
+    TextView txtWalkerTel, txtWalkerAddr, txtWalkerName,txtWalkerCareer ,txtWalkerNurtuer,txtDay,txtCompleteDay,txtWait;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +46,14 @@ public class WalkerDetail extends AppCompatActivity {
         txtWalkerTel=findViewById(R.id.txtTel);
         txtDay =findViewById(R.id.test8);
         txtCompleteDay=findViewById(R.id.txtCompleteDay);
+txtWait=findViewById(R.id.txtWait);
 
-
-
+        txtWait.setVisibility(View.GONE);
         txtDay.setVisibility(View.GONE);
         txtCompleteDay.setVisibility(View.GONE);
 
         applicationWalkerProfile= new ApplicationWalkerProfile();
-        applicationWalkerProfileWalker = new ApplicationWalkerProfile();
+       // applicationWalkerProfileWalker = new ApplicationWalkerProfile();
 
         btnApplication =findViewById(R.id.btnApproval);
         btnCancel=findViewById(R.id.btnCancle);
@@ -80,7 +80,7 @@ if (value!=null) {
     txtWalkerCareer.setText(value.getWalkerCareer());
 
 
-}
+
 
 
     if (value.getIsReservation().equals("0")) //워커가 오너한테 신청 오너가 수락 단계
@@ -88,14 +88,15 @@ if (value!=null) {
         btnApplication.setVisibility(View.VISIBLE);
         btnCancel.setVisibility(View.VISIBLE);
         btnComplete.setVisibility(View.GONE);
-
+        txtWait.setVisibility(View.GONE);
 
     }else if (value.getIsReservation().equals("1"))//워커가 인수 인계 하는 단계 산책중으로 넘어감
     {
 
         btnApplication.setVisibility(View.GONE);
-        btnCancel.setVisibility(View.VISIBLE);
+        btnCancel.setVisibility(View.GONE);
         btnComplete.setVisibility(View.GONE);
+        txtWait.setVisibility(View.VISIBLE);
     }else if(value.getIsReservation().equals("2"))//오너가 인수인계 하는 단계 산책완료로 넘어감
     {
         btnComplete.setVisibility(View.VISIBLE);
@@ -103,17 +104,43 @@ if (value!=null) {
         btnCancel.setVisibility(View.GONE);
         txtDay.setVisibility(View.GONE);
         txtCompleteDay.setVisibility(View.GONE);
+        txtWait.setVisibility(View.GONE);
     }else  if(value.getIsReservation().equals("3"))
     {
-        btnComplete.setVisibility(View.GONE);
+        btnComplete.setVisibility(View.VISIBLE);
         btnApplication.setVisibility(View.GONE);
         btnCancel.setVisibility(View.GONE);
         txtDay.setVisibility(View.VISIBLE);
         txtCompleteDay.setVisibility(View.GONE);
+        txtWait.setVisibility(View.GONE);
     }
+    btnComplete.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            applicationWalkerProfile.setIsReservation("3");//인수인계완료
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+            Date date = new Date(System.currentTimeMillis());
+            applicationWalkerProfile.setCompleteDay(formatter.format(date).toString());
+            txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
+            mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+            mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+            finish();
+        }
+    });
+    btnApplication.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            applicationWalkerProfile.setIsReservation("1");//오너가 수락
+
+            mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+            mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+
+            finish();
+        }
+    });
 
 
-
+}
 }
 
 
@@ -132,29 +159,6 @@ if (value!=null) {
 
 
 
-        btnComplete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                applicationWalkerProfile.setIsReservation("2");//인수인계완료
-                SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-                Date date = new Date(System.currentTimeMillis());
-                applicationWalkerProfile.setCompleteDay(formatter.format(date).toString());
-                txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
-                mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
-                finish();
-            }
-        });
-        btnApplication.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                applicationWalkerProfile.setIsReservation("1");//오너가 수락
-
-                mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
-
-
-                finish();
-            }
-        });
 
     }
 
@@ -164,7 +168,7 @@ if (value!=null) {
 
     public void readWalkerProfileFirebaseValue(FirebaseCallback callback) {
 
-        DatabaseReference uidRef = mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID);
+        DatabaseReference uidRef = mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID);
         uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -181,7 +185,7 @@ if (value!=null) {
     }
     public void readProfileFirebaseValue(FirebaseCallback callback) {
 
-        DatabaseReference uidRef = mDatabase.child("ApplicationList").child(walkerUid).child(walkerUUID);
+        DatabaseReference uidRef = mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID);
         uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {

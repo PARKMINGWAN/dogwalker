@@ -52,7 +52,7 @@ public class ApplicationListAdapter extends RecyclerView.Adapter<ApplicationList
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.walkerlist_profile, parent, false);
         ApplicationListAdapter.MyViewHolder myViewHolder = new ApplicationListAdapter.MyViewHolder(view);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
+       FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         uid = user.getUid();
         return myViewHolder;
     }
@@ -74,7 +74,8 @@ public class ApplicationListAdapter extends RecyclerView.Adapter<ApplicationList
                 View dialogView = view.inflate(view.getContext(), R.layout.walker_list_add, null);
                 Intent intent = new Intent(view.getContext(), WalkerDetail.class);
                 intent.putExtra("walkerUUID",walker.getWalkerUUID());
-                intent.putExtra("onwerUid",uid);
+                intent.putExtra("onwerUid",walker.getOwnerUID());
+                intent.putExtra("walkerUid",walker.getUid());
                 context.startActivity(intent);
 
             }

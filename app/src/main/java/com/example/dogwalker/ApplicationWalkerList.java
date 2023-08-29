@@ -27,9 +27,9 @@ import java.util.List;
 
 public class ApplicationWalkerList extends AppCompatActivity {
     List<ApplicationWalkerProfile> applicationWalkerProfileList,waitList,proceedingList,completeList;
-    private  ApplicationWalkerListAdapter applicationWalkerListAdapter;
+    private  ApplicationWalkerListAdapter applicationListAdapter;
 
-
+    private WalkerListAdapter walkerListAdapter;
 
     EditText walker_name, walker_tel, walker_addr, walker_career;
     TextView walker_nurture,textState;
@@ -44,7 +44,7 @@ public class ApplicationWalkerList extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.application_walker_list);
+        setContentView(R.layout.application_list);
         btnWaitlist = findViewById(R.id.btnWaitlist);
         btnProceeding=findViewById(R.id.btnProceeding);
         btnComplete =findViewById(R.id.btnComplete);
@@ -58,11 +58,11 @@ public class ApplicationWalkerList extends AppCompatActivity {
         uid = user.getUid();
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         readFirebaseValue();
-        applicationWalkerListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,proceedingList);
+        applicationListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,proceedingList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationWalkerList.this,
                 RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(applicationWalkerListAdapter);
+        recyclerView.setAdapter(applicationListAdapter);
         textState.setVisibility(View.GONE);
         btnWaitlist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,18 +73,18 @@ public class ApplicationWalkerList extends AppCompatActivity {
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
-                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("0"))
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("0")||applicationWalkerProfileList.get(i).getIsReservation().equals("1"))
                     {
                         waitList.add(applicationWalkerProfileList.get(i));
                     }
                 }
 
-                applicationWalkerListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,waitList);
+                applicationListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,waitList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationWalkerList.this,
                         RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setAdapter(applicationWalkerListAdapter);
-                applicationWalkerListAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(applicationListAdapter);
+                applicationListAdapter.notifyDataSetChanged();
 
 
             }
@@ -99,18 +99,18 @@ public class ApplicationWalkerList extends AppCompatActivity {
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
-                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("1"))
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("2"))
                     {
                         proceedingList.add(applicationWalkerProfileList.get(i));
                     }
                 }
 
-                applicationWalkerListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,proceedingList);
+                applicationListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,proceedingList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationWalkerList.this,
                         RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setAdapter(applicationWalkerListAdapter);
-                applicationWalkerListAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(applicationListAdapter);
+                applicationListAdapter.notifyDataSetChanged();
 
 
             }
@@ -126,18 +126,18 @@ public class ApplicationWalkerList extends AppCompatActivity {
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
-                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("2"))
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("3"))
                     {
                         completeList.add(applicationWalkerProfileList.get(i));
                     }
                 }
 
-                applicationWalkerListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,completeList);
+                applicationListAdapter =new ApplicationWalkerListAdapter(ApplicationWalkerList.this,completeList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationWalkerList.this,
                         RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setAdapter(applicationWalkerListAdapter);
-                applicationWalkerListAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(applicationListAdapter);
+                applicationListAdapter.notifyDataSetChanged();
 
 
             }
@@ -148,28 +148,19 @@ public class ApplicationWalkerList extends AppCompatActivity {
 
     public void readFirebaseValue() {
         Log.d("오우너 파베 시작 : ","1");
-        DatabaseReference listRef = mDatabase.child("ApplicationList").child(uid);
+        DatabaseReference listRef = mDatabase.child("ApplicationList").child("walker").child(uid);
         Log.d("오우너 파베 시작 : ","2");
         listRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("오우너 파베 시작 : ","3");
                 if (task.isSuccessful()) {
-                    Log.d("오우너 파베 시작 : ","4");
                     applicationWalkerProfileList.clear();
-                    Log.d("오우너 UID : ",uid+"6");
                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
                         //  String Key = snapshot.getKey();
-                        // Log.d("오우너 키값 확인", Key + " ");
-                        Log.d("오우너 UID : ",uid+"6");
                         ApplicationWalkerProfile value = snapshot.getValue(ApplicationWalkerProfile.class);
-                        Log.d("오우너 값 확인", value.getWalkerAddr() + " ");
-
                         applicationWalkerProfileList.add(value);
-
                     }
-                    applicationWalkerListAdapter.notifyDataSetChanged();
+                    applicationListAdapter.notifyDataSetChanged();
 
                 } else {
 

@@ -11,6 +11,8 @@ public class ApplicationWalkerProfile {
 
     String ownerUID;
     String dogName;
+    String dogUUID;
+    String WalkerUUID,completeDay;
 
     public String getOwnerUID() {
         return ownerUID;
@@ -20,7 +22,7 @@ public class ApplicationWalkerProfile {
         this.ownerUID = ownerUID;
     }
 
-    String dogUUID;
+
 
     public String getDogUUID() {
         return dogUUID;
@@ -62,7 +64,7 @@ public class ApplicationWalkerProfile {
         this.WalkerUUID = walkerUUID;
     }
 
-    String WalkerUUID,completeDay;
+
 
     public String getCompleteDay() {
         return completeDay;

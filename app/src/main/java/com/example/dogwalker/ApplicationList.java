@@ -81,7 +81,7 @@ public class ApplicationList extends AppCompatActivity {
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
-                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("0"))
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("0")||applicationWalkerProfileList.get(i).getIsReservation().equals("1"))
                     {
                         waitList.add(applicationWalkerProfileList.get(i));
                     }
@@ -107,7 +107,7 @@ public class ApplicationList extends AppCompatActivity {
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
-                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("1"))
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("2"))
                     {
                         proceedingList.add(applicationWalkerProfileList.get(i));
                     }
@@ -134,7 +134,7 @@ public class ApplicationList extends AppCompatActivity {
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
-                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("2"))
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("3"))
                     {
                         completeList.add(applicationWalkerProfileList.get(i));
                     }
@@ -156,26 +156,17 @@ public class ApplicationList extends AppCompatActivity {
 
     public void readFirebaseValue() {
         Log.d("오우너 파베 시작 : ","1");
-        DatabaseReference listRef = mDatabase.child("ApplicationList").child(uid);
+        DatabaseReference listRef = mDatabase.child("ApplicationList").child("owner").child(uid);
         Log.d("오우너 파베 시작 : ","2");
         listRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Log.d("오우너 파베 시작 : ","3");
                 if (task.isSuccessful()) {
-                    Log.d("오우너 파베 시작 : ","4");
                     applicationWalkerProfileList.clear();
-                    Log.d("오우너 UID : ",uid+"6");
                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
                         //  String Key = snapshot.getKey();
-                        // Log.d("오우너 키값 확인", Key + " ");
-                        Log.d("오우너 UID : ",uid+"6");
                         ApplicationWalkerProfile value = snapshot.getValue(ApplicationWalkerProfile.class);
-                        Log.d("오우너 값 확인", value.getWalkerAddr() + " ");
-
                         applicationWalkerProfileList.add(value);
-
                     }
                     applicationListAdapter.notifyDataSetChanged();
 

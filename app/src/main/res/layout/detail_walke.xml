@@ -219,7 +219,13 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_marginTop="5dp">
+                <TextView
+                    android:id="@+id/txtWait"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
+                    style="@style/fontDefault"
+                    android:text="walker에게 강아지를 맡겨 주세요"/>
                 <Button
                     android:id="@+id/btnApproval"
                     style="@style/btnTextStyle"

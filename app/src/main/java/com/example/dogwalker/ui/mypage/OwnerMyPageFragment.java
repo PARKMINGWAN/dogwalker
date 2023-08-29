@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.dogwalker.ApplicationList;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
+import com.example.dogwalker.MyDogList;
 import com.example.dogwalker.OwnerMypageAdd;
 import com.example.dogwalker.Owner;
 import com.example.dogwalker.R;
@@ -62,13 +62,13 @@ public class OwnerMyPageFragment extends Fragment {
     Walker walker;
     DatabaseReference mDatabase;
 
-    TextView txtName, txtId, txtPwd, txtTel, txtAddr, txtBreed, txtDogAge, txtDogWalk;
+    TextView txtName, txtId, txtPwd, txtTel, txtAddr, txtMyDog, txtDogAge, txtDogWalk;
     String name, id, pwd, tel, addr, breed, dogage, dogwalk;
     String uid;
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout, btnInsert, btnAdd, btnReservation;
+    Button btnImgInsert, btnUpdate, btnLogout, btnInsert, btnAdd, btnReservation,btnPayment;
     ImageView profileImg;
 
     EditText etName, etId, etPwd, etTel, etAddr, etBreed, etDogAge, etDogWalk;
@@ -88,14 +88,15 @@ public class OwnerMyPageFragment extends Fragment {
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnAdd = view.findViewById(R.id.btnAdd);
         btnReservation = view.findViewById(R.id.btnReservation);
+        btnPayment = view.findViewById(R.id.btnPayment);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
         txtTel = view.findViewById(R.id.txtTel);
         txtAddr = view.findViewById(R.id.txtAddr);
-        txtBreed = view.findViewById(R.id.txtBreed);
-        txtDogAge = view.findViewById(R.id.txtDogAge);
-        txtDogWalk = view.findViewById(R.id.txtDogWalk);
+        txtMyDog = view.findViewById(R.id.txtMyDog);
+//        txtDogAge = view.findViewById(R.id.txtDogAge);
+//        txtDogWalk = view.findViewById(R.id.txtDogWalk);
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
@@ -136,16 +137,17 @@ public class OwnerMyPageFragment extends Fragment {
         etTel = dialogView.findViewById(R.id.etTel);
         etAddr = dialogView.findViewById(R.id.etAddr);
         etBreed = dialogView.findViewById(R.id.etBreed);
-        etDogAge = dialogView.findViewById(R.id.etDogAge);
-        etDogWalk = dialogView.findViewById(R.id.etDogWalk);
+//        etDogAge = dialogView.findViewById(R.id.etDogAge);
+//        etDogWalk = dialogView.findViewById(R.id.etDogWalk);
 
         btnReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
- Intent intent = new Intent(view.getContext(), ApplicationList.class);
- startActivity(intent);
+                 Intent intent = new Intent(view.getContext(), ApplicationList.class);
+                 startActivity(intent);
             }
         });
+
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,9 +165,9 @@ public class OwnerMyPageFragment extends Fragment {
                     txtAddr.setText(value.getAddr());
                     txtTel.setText(value.getTel());
                     txtPwd.setText(value.getPwd());
-                    txtBreed.setText(value.getBreed());
-                    txtDogAge.setText(value.getDog_age());
-                    txtDogWalk.setText(value.getDog_walk());
+//                    txtBreed.setText(value.getBreed());
+//                    txtDogAge.setText(value.getDog_age());
+//                    txtDogWalk.setText(value.getDog_walk());
                 } else {
 
                 }
@@ -175,8 +177,24 @@ public class OwnerMyPageFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getContext(), OwnerMypageAdd.class);
+                startActivity(intent);
+
+            }
+        });
+
+        btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        txtMyDog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("111111","eeeeee");
+                Intent intent = new Intent(getContext(), MyDogList.class);
                 startActivity(intent);
 
             }

@@ -70,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
                            // account.setUserName(strName);
                             mDatabaseRef.child("UserAccount").child(user.getUid()).setValue(account);
                             Toast.makeText(RegisterActivity.this, "회원가입 성공.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("join fail", "createUserWithEmail:failure", task.getException());

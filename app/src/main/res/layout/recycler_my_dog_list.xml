@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#73E7E7E7"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_background">
+
+        <TextView
+            android:id="@+id/test6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"/>
+
+
+        <TextView
+            android:id="@+id/test7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@+id/test6"
+            android:layout_alignTop="@+id/test6"
+            android:fontFamily="@font/pretendard"
+            android:textColor="#818181"
+            android:text="반려견 정보"/>
+
+
+        <TextView
+            android:id="@+id/test8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강아지 품종"
+            android:layout_below="@id/test7"
+            style="@style/fontKey" />
+
+
+        <TextView
+            android:id="@+id/txtBreed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignTop="@+id/test8"
+            style="@style/fontValue" />
+
+
+        <TextView
+            android:id="@+id/test9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강아지 나이"
+            style="@style/fontKey"
+            android:layout_below="@+id/test8"/>
+
+        <TextView
+            android:id="@+id/txtDogAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignTop="@+id/test9"
+            style="@style/fontValue"/>
+
+        <TextView
+            android:id="@+id/test10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="산책 시간"
+            android:layout_marginBottom="15dp"
+            style="@style/fontKey"
+            android:layout_below="@+id/test9"
+
+            />
+
+        <TextView
+            android:id="@+id/txtDogWalk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/test10"
+            style="@style/fontValue" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

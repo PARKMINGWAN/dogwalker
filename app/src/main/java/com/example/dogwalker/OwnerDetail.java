@@ -118,8 +118,8 @@ public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback
 
                    Log.d("디테일 신청 프로필 경력 : ",applicationWalkerProfile.getWalkerCareer());
                 mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
-
-
+              //  mDatabase.child("ApplicationList").child(walkerUid).child(dogUUID).setValue(applicationWalkerProfile);
+   //오너 프로필로 나중에 하나 저장해서 새로운 인텐트
                 startActivity(intent);
             }
         });

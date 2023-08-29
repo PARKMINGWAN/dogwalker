@@ -15,13 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dogwalker.Owner;
 import com.example.dogwalker.OwnerListAdapter;
 import com.example.dogwalker.OwnerProfile;
 import com.example.dogwalker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -135,7 +134,7 @@ public class HomeFragment extends Fragment {
                         Log.d("오너 키값 확인", Key + " ");
                         OwnerProfile value = snapshot.getValue(OwnerProfile.class);
                         Log.d("오너 값 확인", value.getDogName() + " ");
-                        if (value.isReservation()==false) {
+                        if (value.getIsReservation().equals("0")) {
                             ownerList.add(value);
                         }
                     }

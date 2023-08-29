@@ -121,7 +121,9 @@ public class HomeFragment2 extends Fragment {
                 walker.setWalkerCareer(walker_career.getText().toString());
                 walker.setWalkerNurture(walker_nurture.getText().toString());
                 walker.setUid(uid);
+
                 walker.setWalkerUUID(walkerUUID);
+
                 radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup radioGroup, int i) {

@@ -7,14 +7,14 @@ public class ApplicationWalkerProfile {
     String walkerCareer;
     String walkerTel;
     String Uid;
-    boolean reservation =false;
+    String isReservation;
 
-    public boolean isReservation() {
-        return reservation;
+    public String getIsReservation() {
+        return isReservation;
     }
 
-    public void setReservation(boolean reservation) {
-        this.reservation = reservation;
+    public void setIsReservation(String isReservation) {
+        this.isReservation = isReservation;
     }
 
     public String getUid() {
@@ -43,6 +43,7 @@ public class ApplicationWalkerProfile {
     }
 
     public ApplicationWalkerProfile() {
+        this.isReservation ="0";
     }
 
     public String getWalkerName() {

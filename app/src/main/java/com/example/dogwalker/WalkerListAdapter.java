@@ -1,6 +1,7 @@
 package com.example.dogwalker;
 
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         //Toast.makeText(,Toast.LENGTH_SHORT).show();
         mDatabase = FirebaseDatabase.getInstance().getReference("list");
         walkerList.add(walkerProfile);
-       mDatabase.child("walker").child(uid).setValue(walkerProfile);
+
+       mDatabase.child("walker").child(walkerProfile.getUid()).setValue(walkerProfile);
         notifyDataSetChanged();
 
     }

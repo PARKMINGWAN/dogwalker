@@ -1,5 +1,6 @@
 package com.example.dogwalker.ui.map;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.dogwalker.MapPoint;
 import com.example.dogwalker.Owner;
+import com.example.dogwalker.OwnerDetail;
 import com.example.dogwalker.OwnerProfile;
 import com.example.dogwalker.R;
 import com.example.dogwalker.databinding.FragmentMapBinding;
@@ -164,13 +166,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         ViewGroup viewGroup = getView().findViewById(R.id.fragment_map_container);
         MapPoint mapPoint = new MapPoint(getContext().getApplicationContext(), viewGroup,ownerList.get(position));
      //   mapPoint.updateMarkerOwner(ownerList.get(position));
-
+        OwnerProfile owner = ownerList.get(position);
         //ui
         InfoWindow infoWindow = new InfoWindow();
         infoWindow.setAdapter(mapPoint);
         infoWindow.setZIndex(10);
         infoWindow.setAlpha(0.9f);
         infoWindow.open(marker);
+
+        infoWindow.setOnClickListener(overlay -> {
+            Intent intent = new Intent(getContext(), OwnerDetail.class);
+            intent.putExtra("dogUUID",owner.getOwnerUUID());
+            intent.putExtra("dogName",owner.getDogName());
+            startActivity(intent);
+            return true;
+        });
 
         currentlyOpenInfoWindow = infoWindow;
     }

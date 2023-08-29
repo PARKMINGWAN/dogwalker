@@ -29,6 +29,7 @@ import com.example.dogwalker.FirebaseManager;
 import com.example.dogwalker.HomePage;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
+import com.example.dogwalker.Owner_tab;
 import com.example.dogwalker.WalkerMypageAdd;
 import com.example.dogwalker.Walker_tab;
 import com.example.dogwalker.R;
@@ -71,7 +72,7 @@ public class WalkerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd,btnReservation;
+    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd,btnReservation,btnOwner;
     ImageView profileImg;
 
     EditText etName,etId,etPwd,etTel,etAddr,etCareer;
@@ -93,6 +94,7 @@ public class WalkerMyPageFragment extends Fragment {
         btnImgDelete = view.findViewById(R.id.btnImgDelete);
         btnAdd = view.findViewById(R.id.btnAdd);
         btnReservation =view.findViewById(R.id.btnReservation);
+        btnOwner = view.findViewById(R.id.btnOwner);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -100,6 +102,15 @@ public class WalkerMyPageFragment extends Fragment {
         txtAddr = view.findViewById(R.id.txtAddr);
         txtCareer = view.findViewById(R.id.txtCareer);
         txtNurture = view.findViewById(R.id.txtNurture);
+
+        btnOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), Owner_tab.class);
+                startActivity(intent);
+
+            }
+        });
 
 
 

@@ -30,9 +30,11 @@ import com.example.dogwalker.MainActivity;
 import com.example.dogwalker.MyDogList;
 import com.example.dogwalker.OwnerMypageAdd;
 import com.example.dogwalker.Owner;
+import com.example.dogwalker.Owner_tab;
 import com.example.dogwalker.R;
 import com.example.dogwalker.Walker;
 import com.example.dogwalker.WalkerAdapter;
+import com.example.dogwalker.Walker_tab;
 import com.example.dogwalker.databinding.FragmentOwnerMypageBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -68,7 +70,7 @@ public class OwnerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout, btnInsert, btnAdd, btnReservation,btnPayment;
+    Button btnImgInsert, btnUpdate, btnLogout, btnInsert, btnAdd, btnReservation,btnPayment,btnWalker;
     ImageView profileImg;
 
     EditText etName, etId, etPwd, etTel, etAddr, etBreed, etDogAge, etDogWalk;
@@ -89,6 +91,7 @@ public class OwnerMyPageFragment extends Fragment {
         btnAdd = view.findViewById(R.id.btnAdd);
         btnReservation = view.findViewById(R.id.btnReservation);
         btnPayment = view.findViewById(R.id.btnPayment);
+        btnWalker = view.findViewById(R.id.btnWalker);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -97,6 +100,15 @@ public class OwnerMyPageFragment extends Fragment {
         txtMyDog = view.findViewById(R.id.txtMyDog);
 //        txtDogAge = view.findViewById(R.id.txtDogAge);
 //        txtDogWalk = view.findViewById(R.id.txtDogWalk);
+
+        btnWalker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), Walker_tab.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");

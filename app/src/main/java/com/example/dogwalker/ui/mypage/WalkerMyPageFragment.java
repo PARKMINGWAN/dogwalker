@@ -42,8 +42,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -291,9 +293,38 @@ public class WalkerMyPageFragment extends Fragment {
     }
 
 
+
     public interface FirebaseCallback {
         void onResponse(Walker value);
     }
+
+
+//    public void readFirebaseValue(FirebaseCallback callback) {
+//
+//        DatabaseReference uidRef = mDatabase.child(uid).child("walker");
+//        Log.d("getKey : ", uidRef.getKey() );
+//        uidRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//               // Log.d("Value : ", dataSnapshot.child(uid).child("walker").getValue().toString());
+//                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+//                    Log.d("워커이름 : ", ds.getValue().toString()+"" );
+//                    Walker value = ds.getValue(Walker.class);
+//
+//                    Log.d("워커이름 ", value.getName()+"");
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
+
 
     public void readFirebaseValue(FirebaseCallback callback) {
 

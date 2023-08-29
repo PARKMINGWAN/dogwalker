@@ -210,7 +210,7 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
 
             firebaseManager =new FirebaseManager();
             firebaseManager.fireBaseImgLoad2(imgProfile,context,itemView,uuid,uuid);
-
+//
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

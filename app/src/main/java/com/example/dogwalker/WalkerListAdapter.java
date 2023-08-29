@@ -1,14 +1,23 @@
 package com.example.dogwalker;
 
+import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
+
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +33,20 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
     DatabaseReference mDatabase;
     String uid;
     private List<WalkerProfile> walkerList;
+    ImageView imgProfile;
+    Button btnInfoInsert, btnImgInsert;
+    Uri imgUrl;
+    private ProgressBar progressBar;
+
+    public WalkerListAdapter(List<WalkerProfile> walkerList, Context context) {
+        this.walkerList = walkerList;
+        this.context = context;
+    }
+
+    Context context;
+
+
+    FirebaseManager firebaseManager = new FirebaseManager();
 
     public WalkerListAdapter(List<WalkerProfile> walkerList) {
         this.walkerList = walkerList;
@@ -53,8 +76,19 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         MyViewHolder myViewHolder = new MyViewHolder(view);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         uid = user.getUid();
+        imgProfile = view.findViewById(R.id.imgWalker);
+
+
+
+
+    
+
+
+
         return myViewHolder;
+
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull WalkerListAdapter.MyViewHolder holder, int position) {
@@ -65,6 +99,9 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
             holder.walkerAddr.setText(walker.getWalkerAddr());
             holder.walkerNurture.setText(walker.getWalkerNurture());
             holder.walkerCareer.setText(walker.getWalkerCareer());
+
+
+
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

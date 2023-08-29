@@ -38,6 +38,11 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
     double longitudes;
     double latitudes;
     private List<OwnerProfile> ownerList;
+    String uid,uuid;
+
+    FirebaseManager firebaseManager;
+
+    ImageView imgProfile;
 
     public OwnerListAdapter(Context context,List<OwnerProfile> ownerList) {
         this.context=context;
@@ -138,6 +143,9 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.ownerlist_profile, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
+        firebaseManager = new FirebaseManager();
+
+
         return myViewHolder;
     }
 
@@ -151,6 +159,9 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
                 holder.dogBreed.setText(owner.getBread());
                 holder.dogWalk.setText(owner.getWalkTime());
                 holder.addr.setText(owner.getAddr());
+
+                uuid = owner.getDogUUID();
+                uid = owner.getUid();
 
         }
 
@@ -184,7 +195,7 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView dogName, dogAge, dogBreed, dogWalk, addr;
-        ImageView imgOwner;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -194,7 +205,11 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
             dogBreed = itemView.findViewById(R.id.dogBreed);
             dogWalk = itemView.findViewById(R.id.dogWalk);
             addr = itemView.findViewById(R.id.addr);
-            imgOwner = itemView.findViewById(R.id.imgOwner);
+            imgProfile = itemView.findViewById(R.id.imgProfile);
+
+
+            firebaseManager =new FirebaseManager();
+            firebaseManager.fireBaseImgLoad2(imgProfile,context,itemView,uuid,uuid);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

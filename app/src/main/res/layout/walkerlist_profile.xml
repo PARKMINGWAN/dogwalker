@@ -16,7 +16,8 @@
             android:id="@+id/imgWalker"
             android:layout_width="150dp"
             android:layout_height="100dp"
-            android:src="@drawable/walker"/>
+            android:src="@drawable/walker"
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -1,5 +1,8 @@
 package com.example.dogwalker;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -7,14 +10,20 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.dogwalker.ui.mypage.OwnerMyPageFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapFragment;
@@ -40,6 +51,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallback {
     List<OwnerProfile> ownerList;
     private ProgressBar progressBar;
@@ -50,11 +63,17 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
     double longitudes;
     double latitudes;
 
+    Uri imgUrl;
+
     List<Double> longitudesPath;
     List<Double> latitudesPath;
     private OwnerListAdapter ownerListAdapter;
     OwnerProfile ownerProfile;
     String dogUUID,uid;
+
+    ImageView imgProfile;
+
+    FirebaseManager firebaseManager;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private static final String[] PERMISSIONS = {
@@ -78,6 +97,21 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         progressBar.setVisibility(View.INVISIBLE);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btnInfoInsert = findViewById(R.id.btnInfoInsert);
+        btnImgInsert= findViewById(R.id.btnImgInsert);
+        imgProfile = findViewById(R.id.imgProfile);
+
+
+
+
+
+
+
+
+        firebaseManager =new FirebaseManager();
+
+
+
+
 
         etName = findViewById(R.id.etName);
         etTel = findViewById(R.id.etTel);
@@ -105,10 +139,46 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
 
         mapFragment.getMapAsync(this);
 
+
+        ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
+                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+
+                    if (uri != null) {
+                        Log.d("PhotoPicker", "Selected URI: " + uri);
+                        imgProfile.setImageURI(uri);
+                        imgUrl = uri;
+
+                    } else {
+                        Log.d("PhotoPicker", "No media selected");
+                    }
+                });
+
+
+
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
         pathFormFirebase();
 
+
+
+
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("오너에드 클릭 : ","클릭됨");
+                pickMedia.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
+                        .build());
+
+            }
+        });
+
+        btnImgInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseManager.fireBaseImgProfileUpload(progressBar,dogUUID,imgUrl,OwnerMypageAdd.this,dogUUID);
+            }
+        });
         btnInfoInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +203,7 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
                 startActivity(intent);
             }
         });
+
     }
 
     @Override

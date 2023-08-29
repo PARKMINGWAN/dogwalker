@@ -73,11 +73,76 @@ public class FirebaseManager {
     }
 
 
+    public void fireBaseImgProfileUpload(ProgressBar progressBar, String uuid,Uri imgUrl,Context context,String path)
+    {
+        if (imgUrl == null) {
+            return;
+        }
+
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+
+        String fileName = "PROFILE_" + uuid+ ".jpg";
+
+        //저장할 파일 위치에 대한 참조객체
+        StorageReference imgRef = firebaseStorage.getReference(uid +path +"/"+ fileName); //저장할 이름
+        //폴더가 없으면 만들고 있으면 그냥 참조한다
+
+        //위 저장 경로 참조객체에게 실제파일 업로드 시키기
+        imgRef.putFile(imgUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(context, "업로드 성공", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(context, "error : " + e, Toast.LENGTH_SHORT).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+
 
     public void fireBaseImgLoad(ImageView profileImg,Context context,View view, int num) {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         String fileName = "PROFILE_" + num+ ".jpg";
         StorageReference imgRef = storageReference.child(uid+"/"+fileName);
+        Toast.makeText(context,"imgRef",Toast.LENGTH_SHORT).show();
+        if(imgRef != null) {
+            imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Toast.makeText(context,"사진불러오기 성공" + uri.toString(),Toast.LENGTH_SHORT).show();
+                    Log.d("uri로그 " , uri.toString());
+                    Glide.with(view.getContext())
+                            .load(uri)
+                            .into(profileImg);
+
+                }
+            });
+        }
+
+
+
+    }
+
+    public void fireBaseImgLoad2(ImageView profileImg,Context context,View view, String uuid,String path) {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        String fileName = "PROFILE_" + uuid+ ".jpg";
+
+        StorageReference imgRef = storageReference.child(uid+path+"/"+fileName);
         Toast.makeText(context,"imgRef",Toast.LENGTH_SHORT).show();
         if(imgRef != null) {
             imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

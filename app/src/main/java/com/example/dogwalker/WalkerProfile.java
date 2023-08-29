@@ -8,6 +8,25 @@ public class WalkerProfile {
     String walkerTel;
     String Uid;
 
+    double longitude; // 위도
+    double latitude; // 경도
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     public String getUid() {
         return Uid;
     }
@@ -75,4 +94,5 @@ public class WalkerProfile {
     public void setWalkerTel(String walkerTel) {
         this.walkerTel = walkerTel;
     }
+
 }

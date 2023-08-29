@@ -34,13 +34,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class ApplicationList extends AppCompatActivity {
-    List<ApplicationWalkerProfile> applicationWalkerProfileList,waitList,ProceedingList,CompleteList;
+    List<ApplicationWalkerProfile> applicationWalkerProfileList,waitList,proceedingList,completeList;
     private  ApplicationListAdapter applicationListAdapter;
 
     private WalkerListAdapter walkerListAdapter;
 
     EditText walker_name, walker_tel, walker_addr, walker_career;
-    TextView walker_nurture;
+    TextView walker_nurture,textState;
 
     RadioButton btn1, btn2;
     Button btnWaitlist, btnProceeding,btnComplete;
@@ -56,28 +56,88 @@ public class ApplicationList extends AppCompatActivity {
         btnWaitlist = findViewById(R.id.btnWaitlist);
         btnProceeding=findViewById(R.id.btnProceeding);
         btnComplete =findViewById(R.id.btnComplete);
-
+        textState = findViewById(R.id.textState);
+        applicationWalkerProfileList =new ArrayList<ApplicationWalkerProfile>();
+        waitList =new ArrayList<ApplicationWalkerProfile>();
+        proceedingList =new ArrayList<ApplicationWalkerProfile>();
+        completeList =new ArrayList<ApplicationWalkerProfile>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         uid = user.getUid();
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-
+        readFirebaseValue();
+        applicationListAdapter =new ApplicationListAdapter(ApplicationList.this,proceedingList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationList.this,
+                RecyclerView.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(applicationListAdapter);
+        textState.setVisibility(View.GONE);
         btnWaitlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                textState.setVisibility(View.VISIBLE);
+                textState.setText("예약 대기 리스트");
+                waitList.clear();
+                for (int i = 0; i < applicationWalkerProfileList.size(); i++)
+                {
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("0"))
+                    {
+                        waitList.add(applicationWalkerProfileList.get(i));
+                    }
+                }
 
-                applicationWalkerProfileList =new ArrayList<ApplicationWalkerProfile>();
-                readFirebaseValue();
-                applicationListAdapter =new ApplicationListAdapter(ApplicationList.this,applicationWalkerProfileList);
+                applicationListAdapter =new ApplicationListAdapter(ApplicationList.this,waitList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationList.this,
                         RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(applicationListAdapter);
+
+            }
+        });
+
+        btnProceeding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textState.setVisibility(View.VISIBLE);
+                textState.setText("산책 진행중 리스트");
+                waitList.clear();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
-                    //if (applicationWalkerProfileList.get(i).get)
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("1"))
+                    {
+                        proceedingList.add(applicationWalkerProfileList.get(i));
+                    }
                 }
 
+                applicationListAdapter =new ApplicationListAdapter(ApplicationList.this,proceedingList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationList.this,
+                        RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(applicationListAdapter);
+
+            }
+        });
+
+
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textState.setVisibility(View.VISIBLE);
+                textState.setText("산책 완료 내역 리스트");
+                completeList.clear();
+                for (int i = 0; i < applicationWalkerProfileList.size(); i++)
+                {
+                    if (applicationWalkerProfileList.get(i).getIsReservation().equals("2"))
+                    {
+                        completeList.add(applicationWalkerProfileList.get(i));
+                    }
+                }
+
+                applicationListAdapter =new ApplicationListAdapter(ApplicationList.this,waitList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationList.this,
+                        RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(applicationListAdapter);
 
             }
         });

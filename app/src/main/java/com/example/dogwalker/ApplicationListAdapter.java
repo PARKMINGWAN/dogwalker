@@ -72,16 +72,10 @@ public class ApplicationListAdapter extends RecyclerView.Adapter<ApplicationList
             @Override
             public void onClick(View view) {
                 View dialogView = view.inflate(view.getContext(), R.layout.walker_list_add, null);
-                EditText walker_name = dialogView.findViewById(R.id.walker_name);
-                EditText walker_tel = dialogView.findViewById(R.id.walker_tel);
-                EditText walker_addr = dialogView.findViewById(R.id.walker_addr);
-                EditText walker_career = dialogView.findViewById(R.id.walker_career);
-                TextView walker_nurture = dialogView.findViewById(R.id.walker_nurture);
-                walker_name.setText(walker.getWalkerName());
-                walker_tel.setText(walker.getWalkerTel());
-                walker_addr.setText(walker.getWalkerAddr());
-                walker_career.setText(walker.getWalkerCareer());
-                walker_nurture.setText(walker.getWalkerNurture());
+                Intent intent = new Intent(view.getContext(), WalkerDetail.class);
+                intent.putExtra("walkerUUID",walker.getWalkerUUID());
+                intent.putExtra("onwerUid",uid);
+                context.startActivity(intent);
 
             }
         });

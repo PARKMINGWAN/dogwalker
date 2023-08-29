@@ -24,7 +24,7 @@ public class OwnerProfile {
         this.ownerTel = ownerTel;
     }
 
-    boolean reservation =false;
+    String isReservation;
 
     public String getOwnerUUID() {
         return dogUUID;
@@ -34,12 +34,12 @@ public class OwnerProfile {
         this.dogUUID = ownerUUID;
     }
 
-    public boolean isReservation() {
-        return reservation;
+    public String getIsReservation() {
+        return isReservation;
     }
 
-    public void setReservation(boolean reservation) {
-        this.reservation = reservation;
+    public void setIsReservation(String isReservation) {
+        this.isReservation = isReservation;
     }
 
     public String getUid() {
@@ -79,6 +79,7 @@ public class OwnerProfile {
     }
 
     public OwnerProfile() {
+        this.isReservation="0";
     }
 
     public String getAddr() {

@@ -71,7 +71,7 @@ public class WalkerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd;
+    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd,btnReservation;
     ImageView profileImg;
 
     EditText etName,etId,etPwd,etTel,etAddr,etCareer;
@@ -92,6 +92,7 @@ public class WalkerMyPageFragment extends Fragment {
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnImgDelete = view.findViewById(R.id.btnImgDelete);
         btnAdd = view.findViewById(R.id.btnAdd);
+        btnReservation =view.findViewById(R.id.btnReservation);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);

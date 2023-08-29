@@ -160,6 +160,7 @@ public class OwnerListAdapter extends RecyclerView.Adapter<OwnerListAdapter.MyVi
                 View dialogView = view.inflate(view.getContext(), R.layout.owner_list_add, null);
                 Intent intent = new Intent(view.getContext(), OwnerDetail.class);
                 intent.putExtra("dogUUID",owner.getOwnerUUID());
+                intent.putExtra("dogName",owner.getDogName());
               context.startActivity(intent);
             /*    EditText dog_name = dialogView.findViewById(R.id.dog_name);
                 EditText dog_age = dialogView.findViewById(R.id.dog_age);

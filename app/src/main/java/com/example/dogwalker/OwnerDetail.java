@@ -41,7 +41,7 @@ import java.util.UUID;
 
 public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback {
     private ProgressBar progressBar;
-    String dogUUID,walkerUid,walkerUUID,ownerUid;
+    String dogUUID,walkerUid,walkerUUID,ownerUid, dogName;
     TextView txtDogName, txtDogAge,txtDogWalk,txtOwnerTel,txtOwnerAddr,txtDogBread;
     DatabaseReference mDatabase;
     Button btnApplication;
@@ -67,7 +67,7 @@ public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();
         dogUUID = intent.getStringExtra("dogUUID");
-
+        dogName = intent.getStringExtra("dogName");
         txtDogName =findViewById(R.id.txtName);
         txtDogBread=findViewById(R.id.txtBreed);
         txtDogAge=findViewById(R.id.txtDogAge);
@@ -77,6 +77,7 @@ public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback
 
         applicationWalkerProfile = new ApplicationWalkerProfile();
         walkerUUID = UUID.randomUUID().toString();
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         walkerUid = user.getUid();
@@ -121,6 +122,8 @@ public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback
                 Log.d("디테일 UUID",walkerUUID+"" );
                 Log.d("디테일 오너 UID",ownerUid+"" );
 
+                applicationWalkerProfile.setDogName(dogName);
+                applicationWalkerProfile.setDogUUID(dogUUID);
                 Log.d("디테일 신청 프로필 경력 : ",applicationWalkerProfile.getWalkerCareer());
                 mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
                 //  mDatabase.child("ApplicationList").child(walkerUid).child(dogUUID).setValue(applicationWalkerProfile);

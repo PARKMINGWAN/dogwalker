@@ -9,6 +9,26 @@ public class ApplicationWalkerProfile {
     String Uid;
     String isReservation;
 
+    String dogName;
+
+    String dogUUID;
+
+    public String getDogUUID() {
+        return dogUUID;
+    }
+
+    public void setDogUUID(String dogUUID) {
+        this.dogUUID = dogUUID;
+    }
+
+    public String getDogName() {
+        return dogName;
+    }
+
+    public void setDogName(String dogName) {
+        this.dogName = dogName;
+    }
+
     public String getIsReservation() {
         return isReservation;
     }

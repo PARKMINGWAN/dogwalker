@@ -6,5 +6,5 @@
 
     <item
         android:id="@+id/popup_item2"
-        android:title="옵션2" />
+        android:title="예약신청현황" />
 </menu>

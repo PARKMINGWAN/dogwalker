@@ -69,7 +69,7 @@ public class Owner_tab extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 } else if (itemId == R.id.popup_item2) {
-                    Intent intent2 = new Intent(getApplicationContext(), HomePage.class);
+                    Intent intent2 = new Intent(getApplicationContext(), ApplicationList.class);
                     startActivity(intent2);
                     return true;
                 }

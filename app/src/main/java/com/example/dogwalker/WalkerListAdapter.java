@@ -40,7 +40,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         mDatabase = FirebaseDatabase.getInstance().getReference("list");
         walkerList.add(walkerProfile);
 
-       mDatabase.child("walker").child(walkerProfile.getUid()).setValue(walkerProfile);
+        mDatabase.child("walker").child(walkerProfile.getUid()).setValue(walkerProfile);
         notifyDataSetChanged();
 
     }

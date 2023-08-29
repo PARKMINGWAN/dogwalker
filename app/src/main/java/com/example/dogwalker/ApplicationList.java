@@ -99,13 +99,13 @@ public class ApplicationList extends AppCompatActivity {
                     applicationWalkerProfileList.clear();
                     Log.d("오우너 UID : ",uid+"6");
                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                      //  String Key = snapshot.getKey();
-                       // Log.d("오우너 키값 확인", Key + " ");
+                        //  String Key = snapshot.getKey();
+                        // Log.d("오우너 키값 확인", Key + " ");
                         Log.d("오우너 UID : ",uid+"6");
                         ApplicationWalkerProfile value = snapshot.getValue(ApplicationWalkerProfile.class);
                         Log.d("오우너 값 확인", value.getWalkerAddr() + " ");
 
-                            applicationWalkerProfileList.add(value);
+                        applicationWalkerProfileList.add(value);
 
                     }
                     applicationListAdapter.notifyDataSetChanged();

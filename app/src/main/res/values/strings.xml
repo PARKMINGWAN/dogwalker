@@ -8,5 +8,6 @@
     <string name="title_home">Home</string>
     <string name="title_map">Map</string>
     <string name="title_mypage">MyPage</string>
+    <string name="title_more">More</string>
     <string name="title_activity_main3">MainActivity3</string>
 </resources>

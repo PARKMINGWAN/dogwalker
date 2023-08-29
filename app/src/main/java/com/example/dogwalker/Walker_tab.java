@@ -1,6 +1,11 @@
 package com.example.dogwalker;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 
 import com.example.dogwalker.databinding.TabWalkerBinding;
 import com.example.dogwalker.ui.home.HomeFragment;
@@ -46,13 +51,36 @@ public class Walker_tab extends AppCompatActivity {
         walkerMyPageFragment = new WalkerMyPageFragment();
 
 
+        tabWalkerBinding.navView.findViewById(R.id.navigation_more).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupMenu(view);
+            }
+        });
+    }
 
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.nav_host_fragment_activity_main3, homeFragment).commitAllowingStateLoss();
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu());
 
-
-
-
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.popup_item1) {
+                    Intent intent = new Intent(getApplicationContext(), Owner_tab.class);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.popup_item2) {
+                    Intent intent2 = new Intent(getApplicationContext(), HomePage.class);
+                    startActivity(intent2);
+                    return true;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 
 }

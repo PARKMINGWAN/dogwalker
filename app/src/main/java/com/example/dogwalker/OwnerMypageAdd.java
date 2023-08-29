@@ -154,18 +154,18 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
 
     private void pathFormFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference pathRef = database.getReference("paths");
+        DatabaseReference pathRef = database.getReference("paths").child(dogUUID);
 
         pathRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<PathLocation> pathLocations = new ArrayList<>();
-                for (DataSnapshot pathSnapshot : snapshot.getChildren()) {
-                    PathLocation pathLocation = pathSnapshot.getValue(PathLocation.class);
-                    pathLocations.add(pathLocation);
+                PathLocation pathLocation = snapshot.getValue(PathLocation.class);
+                if (pathLocation != null) {
+                    latitudesPath = pathLocation.getLatitude();
+                    longitudesPath = pathLocation.getLongitude();
+                    drawPathOnMap(latitudesPath, longitudesPath);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -194,9 +194,8 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference pathRef = database.getReference("paths");
 
-        String key = pathRef.push().getKey();
         PathLocation pathLocation = new PathLocation(latitudesPath, longitudesPath);
-        pathRef.child(key).setValue(pathLocation);
+        pathRef.child(dogUUID).setValue(pathLocation);
     }
 
     public void addItem(OwnerProfile ownerProfile) {

@@ -78,6 +78,7 @@ public class ApplicationList extends AppCompatActivity {
                 textState.setVisibility(View.VISIBLE);
                 textState.setText("예약 대기 리스트");
                 waitList.clear();
+                readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
                     if (applicationWalkerProfileList.get(i).getIsReservation().equals("0"))
@@ -91,6 +92,8 @@ public class ApplicationList extends AppCompatActivity {
                         RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(applicationListAdapter);
+                applicationListAdapter.notifyDataSetChanged();
+
 
             }
         });
@@ -100,7 +103,8 @@ public class ApplicationList extends AppCompatActivity {
             public void onClick(View view) {
                 textState.setVisibility(View.VISIBLE);
                 textState.setText("산책 진행중 리스트");
-                waitList.clear();
+                proceedingList.clear();
+                readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
                     if (applicationWalkerProfileList.get(i).getIsReservation().equals("1"))
@@ -114,6 +118,8 @@ public class ApplicationList extends AppCompatActivity {
                         RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(applicationListAdapter);
+                applicationListAdapter.notifyDataSetChanged();
+
 
             }
         });
@@ -125,6 +131,7 @@ public class ApplicationList extends AppCompatActivity {
                 textState.setVisibility(View.VISIBLE);
                 textState.setText("산책 완료 내역 리스트");
                 completeList.clear();
+                readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
                 {
                     if (applicationWalkerProfileList.get(i).getIsReservation().equals("2"))
@@ -133,11 +140,13 @@ public class ApplicationList extends AppCompatActivity {
                     }
                 }
 
-                applicationListAdapter =new ApplicationListAdapter(ApplicationList.this,waitList);
+                applicationListAdapter =new ApplicationListAdapter(ApplicationList.this,completeList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager( ApplicationList.this,
                         RecyclerView.VERTICAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(applicationListAdapter);
+                applicationListAdapter.notifyDataSetChanged();
+
 
             }
         });

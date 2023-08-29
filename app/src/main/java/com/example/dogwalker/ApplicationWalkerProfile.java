@@ -33,7 +33,16 @@ public class ApplicationWalkerProfile {
         this.WalkerUUID = walkerUUID;
     }
 
-    String WalkerUUID;
+    String WalkerUUID,completeDay;
+
+    public String getCompleteDay() {
+        return completeDay;
+    }
+
+    public void setCompleteDay(String completeDay) {
+        this.completeDay = completeDay;
+    }
+
     public ApplicationWalkerProfile(String walkerName, String walkerAddr, String walkerNurture, String walkerCareer, String walkerTel) {
         this.walkerName = walkerName;
         this.walkerAddr = walkerAddr;

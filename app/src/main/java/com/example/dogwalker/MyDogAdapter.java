@@ -37,6 +37,7 @@ public class MyDogAdapter
             holder.txtBreed.setText(ownerProfile.getBread());
             holder.txtDogAge.setText(ownerProfile.getDogAge());
             holder.txtDogWalk.setText(ownerProfile.getWalkTime());
+            holder.txtDogName.setText(ownerProfile.getDogName());
 
         }
 
@@ -48,13 +49,14 @@ public class MyDogAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtBreed,txtDogAge,txtDogWalk;
+        TextView txtBreed,txtDogAge,txtDogWalk,txtDogName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtBreed = itemView.findViewById(R.id.txtBreed);
             txtDogAge = itemView.findViewById(R.id.txtDogAge);
             txtDogWalk = itemView.findViewById(R.id.txtDogWalk);
-            Log.d("리사이클러뷰66 : ", txtDogAge.getText().toString()+"");
+            txtDogName = itemView.findViewById(R.id.txtDogName);
+
         }
     }
 

@@ -188,7 +188,30 @@
                     android:text="111111"/>
 
 
+
+                <TextView
+                    android:id="@+id/test8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="산책 날짜  :  "
+                    android:layout_marginBottom="15dp"
+                    style="@style/fontKey"
+                    android:layout_below="@+id/test7"/>
+
+                <TextView
+                    android:id="@+id/txtCompleteDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/test8"
+                    android:layout_alignTop="@+id/test8"
+                    style="@style/fontDefault"
+                    android:text="111111"/>
+
+
             </RelativeLayout>
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -215,6 +238,14 @@
 
                     android:layout_marginLeft="5dp"
                     android:text="취소하기" />
+                <Button
+                    android:id="@+id/btnComplete"
+                    style="@style/btnTextStyle"
+                    android:backgroundTint="#011EB1"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="인수완료" />
 
             </LinearLayout>
 

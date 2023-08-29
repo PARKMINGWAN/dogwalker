@@ -11,19 +11,23 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class WalkerDetail extends AppCompatActivity {
     private ProgressBar progressBar;
     String dogUUID,walkerUid,walkerUUID,ownerUid;
-    Button btnApplication,btnCancel;
+    Button btnApplication,btnCancel,btnComplete;
     DatabaseReference mDatabase;
     ApplicationWalkerProfile applicationWalkerProfile;
-    TextView txtWalkerTel, txtWalkerAddr, txtWalkerName,txtWalkerCareer ,txtWalkerNurtuer;
+    TextView txtWalkerTel, txtWalkerAddr, txtWalkerName,txtWalkerCareer ,txtWalkerNurtuer,txtDay,txtCompleteDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +44,20 @@ public class WalkerDetail extends AppCompatActivity {
         txtWalkerCareer =findViewById(R.id.txtCareer);
         txtWalkerNurtuer=findViewById(R.id.txtNurture);
         txtWalkerTel=findViewById(R.id.txtTel);
+        txtDay =findViewById(R.id.test8);
+        txtCompleteDay=findViewById(R.id.txtCompleteDay);
+
+        txtDay.setVisibility(View.GONE);
+        txtCompleteDay.setVisibility(View.GONE);
         applicationWalkerProfile= new ApplicationWalkerProfile();
+
+
         btnApplication =findViewById(R.id.btnApproval);
         btnCancel=findViewById(R.id.btnCancle);
+        btnComplete= findViewById(R.id.btnComplete);
+
+
+        btnComplete.setVisibility(View.GONE);
         Log.d("워커 디테일 오너 uid : ",ownerUid+"");
         Log.d("워커 디테일 워커 uuid : ",walkerUUID+"");
 
@@ -59,18 +74,46 @@ if (value!=null)
     txtWalkerTel.setText(value.getWalkerTel());
     txtWalkerNurtuer.setText(value.getWalkerNurture());
     txtWalkerCareer.setText(value.getWalkerCareer());
+    if (value.getIsReservation().equals("0"))
+    {
+        btnApplication.setVisibility(View.VISIBLE);
+        btnCancel.setVisibility(View.VISIBLE);
+        btnComplete.setVisibility(View.GONE);
+    }else if (value.getIsReservation().equals("1")){
+        btnApplication.setVisibility(View.GONE);
+        btnCancel.setVisibility(View.GONE);
+        btnComplete.setVisibility(View.VISIBLE);
+    }else {
+        btnComplete.setVisibility(View.GONE);
+        btnApplication.setVisibility(View.GONE);
+        btnCancel.setVisibility(View.GONE);
+        txtDay.setVisibility(View.VISIBLE);
+        txtCompleteDay.setVisibility(View.VISIBLE);
+    }
 
 
 }
             }
         });
 
-        
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                applicationWalkerProfile.setIsReservation("2");//인수인계완료
+                SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                Date date = new Date(System.currentTimeMillis());
+                applicationWalkerProfile.setCompleteDay(formatter.format(date).toString());
+                txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
+                mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+                finish();
+            }
+        });
         btnApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 applicationWalkerProfile.setIsReservation("1");//예약진행중
                 mDatabase.child("ApplicationList").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+                finish();
             }
         });
 

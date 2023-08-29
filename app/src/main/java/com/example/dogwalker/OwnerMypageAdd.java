@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,14 +17,18 @@ import android.widget.ProgressBar;
 import com.example.dogwalker.ui.mypage.OwnerMyPageFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.io.BufferedReader;
@@ -31,6 +36,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,9 +46,12 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
     Button btnInfoInsert, btnImgInsert;
     EditText etName,etTel,etAddr,etBreed,etDogAge,etDogWalk;
     DatabaseReference mDatabase;
-     Context context;//intent 사용하기 위해서 추가ㄴ
+    Context context;//intent 사용하기 위해서 추가ㄴ
     double longitudes;
     double latitudes;
+
+    List<Double> longitudesPath;
+    List<Double> latitudesPath;
     private OwnerListAdapter ownerListAdapter;
     OwnerProfile ownerProfile;
     String dogUUID,uid;
@@ -77,37 +86,12 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         etDogAge = findViewById(R.id.etDogAge);
         etDogWalk = findViewById(R.id.etDogWalk);
 
+        longitudesPath = new ArrayList<Double>();
+        latitudesPath = new ArrayList<Double>();
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         uid = user.getUid();
         dogUUID = UUID.randomUUID().toString();
-
-        btnInfoInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ownerProfile =new OwnerProfile();
-
-                ownerProfile.setDogName(etName.getText().toString());
-                ownerProfile.setOwnerTel(etTel.getText().toString());
-                ownerProfile.setAddr(etAddr.getText().toString());
-                ownerProfile.setBread(etBreed.getText().toString());
-                ownerProfile.setDogAge(etDogAge.getText().toString());
-                ownerProfile.setWalkTime(etDogWalk.getText().toString());
-                ownerProfile.setOwnerUUID(dogUUID);
-                ownerProfile.setUid(uid);
-
-                addItem(ownerProfile);
-
-
-
-
-
-                Intent intent = new Intent(getApplicationContext(), OwnerMyPageFragment.class);
-
-                startActivity(intent);
-
-
-            }
-        });
 
         NaverMapOptions options = new NaverMapOptions()
                 .camera(new CameraPosition(new LatLng(35.1561411, 129.0594806), 12));
@@ -122,12 +106,97 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
 
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+
+        pathFormFirebase();
+
+        btnInfoInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                saveLatLngToFirebase(latitudesPath, longitudesPath);
+
+                ownerProfile =new OwnerProfile();
+
+                ownerProfile.setDogName(etName.getText().toString());
+                ownerProfile.setOwnerTel(etTel.getText().toString());
+                ownerProfile.setAddr(etAddr.getText().toString());
+                ownerProfile.setBread(etBreed.getText().toString());
+                ownerProfile.setDogAge(etDogAge.getText().toString());
+                ownerProfile.setWalkTime(etDogWalk.getText().toString());
+                ownerProfile.setOwnerUUID(dogUUID);
+                ownerProfile.setUid(uid);
+
+                addItem(ownerProfile);
+
+                Intent intent = new Intent(getApplicationContext(), OwnerMyPageFragment.class);
+
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
         naverMap.setLocationSource(locationSource);
+
+        naverMap.setOnMapClickListener((point, coord) -> {
+            double latitude = coord.latitude;
+            double longitude = coord.longitude;
+
+            longitudesPath.add(longitude);
+            latitudesPath.add(latitude);
+
+            drawPathOnMap(latitudesPath, longitudesPath);
+        });
+        pathFormFirebase();
+    }
+
+    private void pathFormFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference pathRef = database.getReference("paths");
+
+        pathRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<PathLocation> pathLocations = new ArrayList<>();
+                for (DataSnapshot pathSnapshot : snapshot.getChildren()) {
+                    PathLocation pathLocation = pathSnapshot.getValue(PathLocation.class);
+                    pathLocations.add(pathLocation);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void drawPathOnMap(List<Double> latitudesPath, List<Double> longitudesPath) {
+        if (latitudesPath.size() >= 2 && latitudesPath.size() == longitudesPath.size()) {
+            PathOverlay path = new PathOverlay();
+            List<LatLng> latLngs = new ArrayList<>();
+
+            for (int i = 0; i<latitudesPath.size(); i++) {
+                latLngs.add(new LatLng(latitudesPath.get(i),longitudesPath.get(i)));
+            }
+
+            path.setCoords(latLngs);
+            path.setColor(Color.BLUE);
+            path.setMap(naverMap);
+        } else {
+            Log.e("DrawPath", "경로 좌표 부족");
+        }
+    }
+
+    private void saveLatLngToFirebase(List<Double> latitude, List<Double> longitude) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference pathRef = database.getReference("paths");
+
+        String key = pathRef.push().getKey();
+        PathLocation pathLocation = new PathLocation(latitudesPath, longitudesPath);
+        pathRef.child(key).setValue(pathLocation);
     }
 
     public void addItem(OwnerProfile ownerProfile) {
@@ -145,7 +214,6 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
         ownerProfile.setLatitude(latitudes);
         ownerProfile.setLongitude(longitudes);

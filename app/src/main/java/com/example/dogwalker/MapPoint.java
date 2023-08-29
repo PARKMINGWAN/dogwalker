@@ -31,7 +31,7 @@ public class MapPoint extends InfoWindow.DefaultViewAdapter {
 
     TextView txtProfile;
     ImageView imagePoint;
-    TextView txtName,txtDogAge,txtBreed ,txtDogWalk;
+    TextView txtName,txtDogAge,txtBreed ,txtDogWalk, txtOwnerTel, txtAddr;
 
 
     public MapPoint(@NonNull Context context, ViewGroup viewGroup, OwnerProfile ownerProfile) {
@@ -44,6 +44,8 @@ public class MapPoint extends InfoWindow.DefaultViewAdapter {
             this.ownerProfile.setDogAge(ownerProfile.getDogAge());
             this.ownerProfile.setBread(ownerProfile.getBread());
             this.ownerProfile.setWalkTime(ownerProfile.getWalkTime());
+            this.ownerProfile.setOwnerTel(ownerProfile.getOwnerTel());
+            this.ownerProfile.setAddr(ownerProfile.getAddr());
         }
     }
 
@@ -55,17 +57,21 @@ public class MapPoint extends InfoWindow.DefaultViewAdapter {
 
 
         View view = LayoutInflater.from(context).inflate(R.layout.activity_map_point, viewGroup, false);
-     txtProfile = (TextView) view.findViewById(R.id.txtProfile);
+        txtProfile = (TextView) view.findViewById(R.id.txtProfile);
         imagePoint = (ImageView) view.findViewById(R.id.imagePoint);
-      txtName = (TextView) view.findViewById(R.id.txtName);
-       txtDogAge = (TextView) view.findViewById(R.id.txtDogAge);
-       txtBreed = (TextView) view.findViewById(R.id.txtBreed);
-     txtDogWalk = (TextView) view.findViewById(R.id.txtDogWalk);
+        txtName = (TextView) view.findViewById(R.id.txtName);
+        txtDogAge = (TextView) view.findViewById(R.id.txtDogAge);
+        txtBreed = (TextView) view.findViewById(R.id.txtBreed);
+        txtDogWalk = (TextView) view.findViewById(R.id.txtDogWalk);
+        txtOwnerTel = (TextView) view.findViewById(R.id.txtOwnerTel);
+        txtAddr = (TextView) view.findViewById(R.id.txtAddr);
 
-     txtName.setText(ownerProfile.getDogName());
+        txtName.setText(ownerProfile.getDogName());
         txtDogAge.setText(ownerProfile.getDogAge());
         txtBreed.setText(ownerProfile.getBread());
         txtDogWalk.setText(ownerProfile.getWalkTime());
+        txtOwnerTel.setText(ownerProfile.getOwnerTel());
+        txtAddr.setText(ownerProfile.getAddr());
 
         txtProfile.setText("반려인 프로필");
 
@@ -87,6 +93,8 @@ public class MapPoint extends InfoWindow.DefaultViewAdapter {
             this.ownerProfile.setDogAge(ownerProfile.getDogAge());
             this.ownerProfile.setBread(ownerProfile.getBread());
             this.ownerProfile.setWalkTime(ownerProfile.getWalkTime());
+            this.ownerProfile.setOwnerTel(ownerProfile.getOwnerTel());
+            this.ownerProfile.setAddr(ownerProfile.getAddr());
 
 
 

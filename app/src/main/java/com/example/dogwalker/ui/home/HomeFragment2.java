@@ -69,7 +69,6 @@ public class HomeFragment2 extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         RecyclerView recyclerView2 = view.findViewById(R.id.recyclerView2);
-        FloatingActionButton floatBtn2 = view.findViewById(R.id.floatBtn2);
 
         walkerList = new ArrayList<WalkerProfile>();
 
@@ -84,12 +83,6 @@ public class HomeFragment2 extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         uid = user.getUid();
         walkerUUID = UUID.randomUUID().toString();
-        floatBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addContact();
-            }
-        });
 
         return view;
     }

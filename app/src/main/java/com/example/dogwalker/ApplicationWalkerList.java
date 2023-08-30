@@ -68,7 +68,7 @@ public class ApplicationWalkerList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 textState.setVisibility(View.VISIBLE);
-                textState.setText("예약 대기 리스트");
+                textState.setText("워커 예약 대기 리스트");
                 waitList.clear();
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
@@ -94,7 +94,7 @@ public class ApplicationWalkerList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 textState.setVisibility(View.VISIBLE);
-                textState.setText("산책 진행중 리스트");
+                textState.setText("워커 산책 진행중 리스트");
                 proceedingList.clear();
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)
@@ -121,7 +121,7 @@ public class ApplicationWalkerList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 textState.setVisibility(View.VISIBLE);
-                textState.setText("산책 완료 내역 리스트");
+                textState.setText("워커 산책 완료 내역 리스트");
                 completeList.clear();
                 readFirebaseValue();
                 for (int i = 0; i < applicationWalkerProfileList.size(); i++)

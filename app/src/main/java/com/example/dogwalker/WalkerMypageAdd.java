@@ -76,7 +76,7 @@ public class WalkerMypageAdd extends AppCompatActivity {
                 walkerProfile.setUid(uid);
                 addItem(walkerProfile);
 
-                Intent intent = new Intent(getApplicationContext(), WalkerListAdapter.class);
+                Intent intent = new Intent(getApplicationContext(), WalkerMyPageFragment.class);
                 startActivity(intent);
 
             }

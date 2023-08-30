@@ -98,7 +98,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
             holder.walkerAddr.setText(walker.getWalkerAddr());
             holder.walkerNurture.setText(walker.getWalkerNurture());
             holder.walkerCareer.setText(walker.getWalkerCareer());
-            firebaseManager.fireBaseOwnerListImgLoad(holder.imgWalker,context,walker.getWalkerUUID());
+            firebaseManager.fireBaseWalkerListImgLoad(holder.imgWalker,context,walker.getWalkerUUID());
 
 
 

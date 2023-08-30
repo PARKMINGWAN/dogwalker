@@ -73,7 +73,7 @@ public class FirebaseManager {
     }
 
 
-    public void fireBaseImgProfileUpload(ProgressBar progressBar, String uuid,Uri imgUrl,Context context)
+    public void fireBaseWalkerImgProfileUpload(ProgressBar progressBar, String uuid,Uri imgUrl,Context context)
     {
         if (imgUrl == null) {
             return;
@@ -84,7 +84,47 @@ public class FirebaseManager {
         String fileName = "PROFILE_" + uuid+ ".jpg";
 
         //저장할 파일 위치에 대한 참조객체
-        StorageReference imgRef = firebaseStorage.getReference(uid +"/"+ fileName); //저장할 이름
+        StorageReference imgRef = firebaseStorage.getReference("walker" +"/"+ fileName); //저장할 이름
+        //폴더가 없으면 만들고 있으면 그냥 참조한다
+
+        //위 저장 경로 참조객체에게 실제파일 업로드 시키기
+        imgRef.putFile(imgUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(context, "업로드 성공", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(context, "error : " + e, Toast.LENGTH_SHORT).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    public void fireBaseOwnerImgProfileUpload(ProgressBar progressBar, String uuid,Uri imgUrl,Context context)
+    {
+        if (imgUrl == null) {
+            return;
+        }
+
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+
+        String fileName = "PROFILE_" + uuid+ ".jpg";
+
+        //저장할 파일 위치에 대한 참조객체
+        StorageReference imgRef = firebaseStorage.getReference("owner" +"/"+ fileName); //저장할 이름
         //폴더가 없으면 만들고 있으면 그냥 참조한다
 
         //위 저장 경로 참조객체에게 실제파일 업로드 시키기
@@ -136,7 +176,25 @@ public class FirebaseManager {
     public void fireBaseOwnerListImgLoad(ImageView profileImg,Context context, String dogUUID) {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         String fileName = "PROFILE_" + dogUUID+ ".jpg";
-        StorageReference imgRef = storageReference.child(uid+"/"+fileName);
+        StorageReference imgRef = storageReference.child("owner"+"/"+fileName);
+        Toast.makeText(context,"imgRef",Toast.LENGTH_SHORT).show();
+        if(imgRef != null) {
+            imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Toast.makeText(context,"사진불러오기 성공" + uri.toString(),Toast.LENGTH_SHORT).show();
+                    Log.d("uri로그 " , uri.toString());
+                    Glide.with(context)
+                            .load(uri)
+                            .into(profileImg);
+                }
+            });
+        }
+    }
+    public void fireBaseWalkerListImgLoad(ImageView profileImg,Context context, String walkerUUID) {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        String fileName = "PROFILE_" + walkerUUID+ ".jpg";
+        StorageReference imgRef = storageReference.child("walker"+"/"+fileName);
         Toast.makeText(context,"imgRef",Toast.LENGTH_SHORT).show();
         if(imgRef != null) {
             imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

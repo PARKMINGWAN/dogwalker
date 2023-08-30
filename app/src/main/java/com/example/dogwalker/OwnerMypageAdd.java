@@ -165,7 +165,7 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseManager.fireBaseImgProfileUpload(progressBar,dogUUID,imgUrl,OwnerMypageAdd.this);
+                firebaseManager.fireBaseOwnerImgProfileUpload(progressBar,dogUUID,imgUrl,OwnerMypageAdd.this);
             }
         });
         btnInfoInsert.setOnClickListener(new View.OnClickListener() {

@@ -97,7 +97,7 @@ public class WalkerMypageAdd extends AppCompatActivity {
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseManager.fireBaseImgProfileUpload(progressBar, walkerUUID, imgUrl,WalkerMypageAdd.this);
+                firebaseManager.fireBaseWalkerImgProfileUpload(progressBar, walkerUUID, imgUrl,WalkerMypageAdd.this);
             }
         });
         btnInfoInsert.setOnClickListener(new View.OnClickListener() {

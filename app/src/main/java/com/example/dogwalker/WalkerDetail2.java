@@ -100,17 +100,18 @@ public class WalkerDetail2 extends AppCompatActivity {
                     } else if (value.getIsReservation().equals("3")) {
 
                         btnCancel.setVisibility(View.GONE);
+                        txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
                         txtDay.setVisibility(View.VISIBLE);
-                        txtCompleteDay.setVisibility(View.GONE);
+                        txtCompleteDay.setVisibility(View.VISIBLE);
                     }
 
                     btnWalkerComplete.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             applicationWalkerProfile.setIsReservation("2");//인수인계완료
-                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-                            Date date = new Date(System.currentTimeMillis());
-                            applicationWalkerProfile.setCompleteDay(formatter.format(date).toString());
+                          //  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                          //  Date date = new Date(System.currentTimeMillis());
+                           // applicationWalkerProfile.setCompleteDay(formatter.format(date).toString());
                             txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
                             mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
                             mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID).setValue(applicationWalkerProfile);

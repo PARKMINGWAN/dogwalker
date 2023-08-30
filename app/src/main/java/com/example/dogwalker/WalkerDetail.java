@@ -109,11 +109,12 @@ if (value!=null) {
 
     }else  if(value.getIsReservation().equals("3"))
     {
-        btnComplete.setVisibility(View.VISIBLE);
+        btnComplete.setVisibility(View.GONE);
         btnApplication.setVisibility(View.GONE);
         btnCancel.setVisibility(View.GONE);
         txtDay.setVisibility(View.VISIBLE);
-        txtCompleteDay.setVisibility(View.GONE);
+        txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
+        txtCompleteDay.setVisibility(View.VISIBLE);
         txtWait.setVisibility(View.GONE);
     }
     btnComplete.setOnClickListener(new View.OnClickListener() {

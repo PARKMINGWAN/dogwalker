@@ -25,9 +25,11 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.dogwalker.ApplicationList;
+import com.example.dogwalker.FirebaseManager;
 import com.example.dogwalker.LoginSharedPreferencesManager;
 import com.example.dogwalker.MainActivity;
 import com.example.dogwalker.MyDogList;
+import com.example.dogwalker.OwnerAdapter;
 import com.example.dogwalker.OwnerMypageAdd;
 import com.example.dogwalker.Owner;
 import com.example.dogwalker.Owner_tab;
@@ -59,21 +61,23 @@ public class OwnerMyPageFragment extends Fragment {
 
     private FragmentOwnerMypageBinding binding;
 
-    WalkerAdapter walkerAdapter;
-    public List<Walker> walkerList;
-    Walker walker;
+    OwnerAdapter ownerAdapter;
+    public List<Owner> ownerList;
+    Owner owner,owner2;
     DatabaseReference mDatabase;
 
-    TextView txtName, txtId, txtPwd, txtTel, txtAddr, txtMyDog, txtDogAge, txtDogWalk;
+    TextView txtName, txtId, txtPwd, txtTel, txtAddr, txtMyDog, txtBreed, txtDogAge, txtDogWalk;
     String name, id, pwd, tel, addr, breed, dogage, dogwalk;
     String uid;
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout, btnInsert, btnAdd, btnReservation,btnPayment,btnWalker;
+    Button btnImgInsert, btnUpdate, btnLogout, btnInsert, btnAdd, btnImgDelete;
     ImageView profileImg;
 
     EditText etName, etId, etPwd, etTel, etAddr, etBreed, etDogAge, etDogWalk;
+
+    FirebaseManager firebaseManager = new FirebaseManager();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -88,6 +92,7 @@ public class OwnerMyPageFragment extends Fragment {
         btnInsert = view.findViewById(R.id.btnInsert);
         btnImgInsert = view.findViewById(R.id.btnimgInsert);
         btnUpdate = view.findViewById(R.id.btnUpdate);
+        btnImgDelete = view.findViewById(R.id.btnImgDelete);
         btnAdd = view.findViewById(R.id.btnAdd);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
@@ -116,6 +121,7 @@ public class OwnerMyPageFragment extends Fragment {
 
 
         progressBar.setVisibility(View.INVISIBLE);
+        firebaseManager.fireBaseImgLoad(profileImg, getContext(), view, 0);
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,7 +149,8 @@ public class OwnerMyPageFragment extends Fragment {
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fireBaseImgUpload();
+                //fireBaseImgUpload();
+                firebaseManager.createProfileImg(profileImg, 0, view, imgUrl, progressBar, getContext());
 
             }
         });
@@ -152,6 +159,8 @@ public class OwnerMyPageFragment extends Fragment {
             @Override
             public void onResponse(Owner value) {
                 if (value != null) {
+                    owner2 = new Owner();
+
                     txtName.setText(value.getName());
                     txtId.setText(value.getId());
                     txtAddr.setText(value.getAddr());
@@ -160,9 +169,24 @@ public class OwnerMyPageFragment extends Fragment {
 //                    txtBreed.setText(value.getBreed());
 //                    txtDogAge.setText(value.getDog_age());
 //                    txtDogWalk.setText(value.getDog_walk());
+
+                    owner2.setName(value.getName());
+                    owner2.setId(value.getId());
+                    owner2.setAddr(value.getAddr());
+                    owner2.setTel(value.getTel());
+                    owner2.setPwd(value.getPwd());
+
                 } else {
 
                 }
+            }
+        });
+
+        btnImgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseManager.fireBaseImgDelete(0);
+                profileImg.setImageResource(R.drawable.default_profile);
             }
         });
 
@@ -204,17 +228,17 @@ public class OwnerMyPageFragment extends Fragment {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Owner owner1 = new Owner();
-                        owner1.setAddr(etAddr.getText().toString());
-                        owner1.setTel(etTel.getText().toString());
-                        owner1.setPwd(etPwd.getText().toString());
-                        owner1.setBreed(etBreed.getText().toString());
-                        owner1.setId(etId.getText().toString());
-                        owner1.setName(etName.getText().toString());
-                        owner1.setDog_age(etDogAge.getText().toString());
-                        owner1.setDog_walk(etDogWalk.getText().toString());
+                        owner = new Owner();
+                        owner.setAddr(etAddr.getText().toString());
+                        owner.setTel(etTel.getText().toString());
+                        owner.setPwd(etPwd.getText().toString());
+                        owner.setBreed(etBreed.getText().toString());
+                        owner.setId(etId.getText().toString());
+                        owner.setName(etName.getText().toString());
+                        owner.setDog_age(etDogAge.getText().toString());
+                        owner.setDog_walk(etDogWalk.getText().toString());
 
-                        mDatabase.child(uid).child("owner").setValue(owner1);
+                        mDatabase.child(uid).child("owner").setValue(owner);
 
                     }
                 });
@@ -245,10 +269,40 @@ public class OwnerMyPageFragment extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setView(dialogView);
+
+                etName.setText(owner2.getName());
+                etId.setText(owner2.getId());
+                etPwd.setText(owner2.getPwd());
+                etAddr.setText(owner2.getAddr());
+                etTel.setText(owner2.getTel());
+                etBreed.setText(owner2.getBreed());
+                etDogAge.setText(owner2.getDog_age());
+                etDogWalk.setText(owner2.getDog_walk());
+
                 builder.setNegativeButton("취소", null);
                 builder.setPositiveButton("수정", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        owner2.setAddr(etAddr.getText().toString());
+                        owner2.setTel(etTel.getText().toString());
+                        owner2.setPwd(etPwd.getText().toString());
+                        owner2.setBreed(etBreed.getText().toString());
+                        owner2.setId(etId.getText().toString());
+                        owner2.setName(etName.getText().toString());
+                        owner2.setDog_age(etDogAge.getText().toString());
+                        owner2.setDog_walk(etDogWalk.getText().toString());
+
+                        mDatabase.child(uid).child("owner").setValue(owner2);
+
+                        txtName.setText(owner2.getName());
+                        txtId.setText(owner2.getId());
+                        txtAddr.setText(owner2.getAddr());
+                        txtTel.setText(owner2.getTel());
+                        txtPwd.setText(owner2.getPwd());
+                        txtBreed.setText(owner2.getBreed());
+                        txtDogAge.setText(owner2.getDog_age());
+                        txtDogWalk.setText(owner2.getDog_walk());
 
                     }
                 });
@@ -264,46 +318,46 @@ public class OwnerMyPageFragment extends Fragment {
     }
 
 
-    private void fireBaseImgUpload() {
-        if (imgUrl == null) {
-            return;
-        }
-
-        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-
-        //저장할 파일 이름이 중복되지 않도록 날짜 붙여주기
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String fileName = "IMG_" + sdf.format(new Date()) + ".jpg";
-
-        //저장할 파일 위치에 대한 참조객체
-        StorageReference imgRef = firebaseStorage.getReference(uid + "/" + fileName); //저장할 이름
-        //폴더가 없으면 만들고 있으면 그냥 참조한다
-
-        //위 저장 경로 참조객체에게 실제파일 업로드 시키기
-        imgRef.putFile(imgUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(getContext(), "업로드 성공", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText(getContext(), "error : " + e, Toast.LENGTH_SHORT).show();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
-    }
+//    private void fireBaseImgUpload() {
+//        if (imgUrl == null) {
+//            return;
+//        }
+//
+//        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+//
+//        //저장할 파일 이름이 중복되지 않도록 날짜 붙여주기
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//        String fileName = "IMG_" + sdf.format(new Date()) + ".jpg";
+//
+//        //저장할 파일 위치에 대한 참조객체
+//        StorageReference imgRef = firebaseStorage.getReference(uid + "/" + fileName); //저장할 이름
+//        //폴더가 없으면 만들고 있으면 그냥 참조한다
+//
+//        //위 저장 경로 참조객체에게 실제파일 업로드 시키기
+//        imgRef.putFile(imgUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                progressBar.setVisibility(View.INVISIBLE);
+//                Toast.makeText(getContext(), "업로드 성공", Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//
+//                Toast.makeText(getContext(), "error : " + e, Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+//                progressBar.setVisibility(View.VISIBLE);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                progressBar.setVisibility(View.INVISIBLE);
+//            }
+//        });
+//    }
 
 
     public interface FirebaseCallback {
@@ -327,25 +381,25 @@ public class OwnerMyPageFragment extends Fragment {
         });
     }
 
-    private void fireBaseImgLoad(ImageView imageView, Context context, String path) {
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-
-        StorageReference imgRef = storageReference.child(uid);
-        Toast.makeText(getContext(), "imgRef", Toast.LENGTH_SHORT).show();
-        if (imgRef != null) {
-            imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Toast.makeText(getContext(), "사진불러오기 성공", Toast.LENGTH_SHORT).show();
-                    Glide.with(context)
-                            .load(storageReference)
-                            .into(imageView);
-
-                    imageView.setImageURI(uri);
-                }
-            });
-        }
-    }
+//    private void fireBaseImgLoad(ImageView imageView, Context context, String path) {
+//        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+//
+//        StorageReference imgRef = storageReference.child(uid);
+//        Toast.makeText(getContext(), "imgRef", Toast.LENGTH_SHORT).show();
+//        if (imgRef != null) {
+//            imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    Toast.makeText(getContext(), "사진불러오기 성공", Toast.LENGTH_SHORT).show();
+//                    Glide.with(context)
+//                            .load(storageReference)
+//                            .into(imageView);
+//
+//                    imageView.setImageURI(uri);
+//                }
+//            });
+//        }
+//    }
 
 
 }

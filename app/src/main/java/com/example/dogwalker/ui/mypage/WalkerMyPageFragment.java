@@ -73,7 +73,7 @@ public class WalkerMyPageFragment extends Fragment {
     private ProgressBar progressBar;
     StorageReference reference;
     Uri imgUrl;
-    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd,btnReservation;
+    Button btnImgInsert, btnUpdate, btnLogout,btnInsert,btnImgDelete,btnAdd;
     ImageView profileImg;
 
     EditText etName,etId,etPwd,etTel,etAddr,etCareer;

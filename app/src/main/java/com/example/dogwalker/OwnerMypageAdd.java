@@ -148,9 +148,6 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
 
         pathFormFirebase();
 
-
-
-
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,6 +158,9 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
 
             }
         });
+
+
+
 
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override

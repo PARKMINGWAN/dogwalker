@@ -1,8 +1,12 @@
 package com.example.dogwalker;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +38,10 @@ public class WalkerMypageAdd extends AppCompatActivity {
     double latitudes;
     private OwnerListAdapter ownerListAdapter;
     WalkerProfile walkerProfile;
-    String dogUUID,uid;
+    String walkerUUID,uid;
+    ImageView imgProfile;
+    FirebaseManager firebaseManager;
+    Uri imgUrl;
 
     @Override
     public void onResume() {
@@ -52,18 +59,47 @@ public class WalkerMypageAdd extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         btnInfoInsert = findViewById(R.id.btnInfoInsert);
-
+        btnImgInsert = findViewById(R.id.btnImgInsert);
         etName = findViewById(R.id.etName);
         etAddr = findViewById(R.id.etAddr);
         etCareer = findViewById(R.id.etCareer);
         etNurture = findViewById(R.id.etNurture);
         etTel = findViewById(R.id.etTel);
-
+        firebaseManager =new FirebaseManager();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         uid = user.getUid();
-        dogUUID = UUID.randomUUID().toString();
+        walkerUUID = UUID.randomUUID().toString();
+        imgProfile= findViewById(R.id.imgProfile);
 
 
+        ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
+                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+
+                    if (uri != null) {
+                        Log.d("PhotoPicker", "Selected URI: " + uri);
+                        imgProfile.setImageURI(uri);
+                        imgUrl = uri;
+
+                    } else {
+                        Log.d("PhotoPicker", "No media selected");
+                    }
+                });
+
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickMedia.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
+                        .build());
+
+            }
+        });
+        btnImgInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseManager.fireBaseImgProfileUpload(progressBar, walkerUUID, imgUrl,WalkerMypageAdd.this);
+            }
+        });
         btnInfoInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +110,7 @@ public class WalkerMypageAdd extends AppCompatActivity {
                 walkerProfile.setWalkerCareer(etCareer.getText().toString());
                 walkerProfile.setWalkerAddr(etAddr.getText().toString());
                 walkerProfile.setUid(uid);
+                walkerProfile.setWalkerUUID(walkerUUID);
                 addItem(walkerProfile);
 
                 Intent intent = new Intent(getApplicationContext(), WalkerMyPageFragment.class);

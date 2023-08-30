@@ -20,45 +20,121 @@
             android:layout_gravity="center"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/walkerName"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="name"/>
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/walkerTel"
+                <TextView
+                    android:id="@+id/walkername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="이름 : "/>
+
+                <TextView
+                    android:id="@+id/walkerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="name"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="name"/>
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/walkerAddr"
+                <TextView
+                    android:id="@+id/walkertel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="전화번호 : "/>
+
+                <TextView
+                    android:id="@+id/walkerTel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="tel"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="name"/>
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/walkerNurture"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="nurture" />
+                <TextView
+                    android:id="@+id/walkeraddr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="주소 : "/>
 
-            <TextView
-                android:id="@+id/walkerCareer"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/walkerAddr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="addr"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="career" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/walkernurture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="양육유무 : "/>
+
+                <TextView
+                    android:id="@+id/walkerNurture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="nurture" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/walkercareer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="산책경험 : "/>
+
+                <TextView
+                    android:id="@+id/walkerCareer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="career" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

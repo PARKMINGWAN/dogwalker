@@ -33,8 +33,9 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
     DatabaseReference mDatabase;
     String uid;
     private List<WalkerProfile> walkerList;
-    ImageView imgProfile;
+
     Button btnInfoInsert, btnImgInsert;
+    FirebaseManager firebaseManager;
     Uri imgUrl;
     private ProgressBar progressBar;
 
@@ -45,8 +46,6 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
 
     Context context;
 
-
-    FirebaseManager firebaseManager = new FirebaseManager();
 
     public WalkerListAdapter(List<WalkerProfile> walkerList) {
         this.walkerList = walkerList;
@@ -76,7 +75,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         MyViewHolder myViewHolder = new MyViewHolder(view);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
         uid = user.getUid();
-        imgProfile = view.findViewById(R.id.imgWalker);
+
 
 
 
@@ -99,6 +98,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
             holder.walkerAddr.setText(walker.getWalkerAddr());
             holder.walkerNurture.setText(walker.getWalkerNurture());
             holder.walkerCareer.setText(walker.getWalkerCareer());
+            firebaseManager.fireBaseOwnerListImgLoad(holder.imgWalker,context,walker.getWalkerUUID());
 
 
 
@@ -135,6 +135,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             //  readFirebaseValue();
+            firebaseManager=new FirebaseManager();
             walkerName = itemView.findViewById(R.id.walkerName);
             walkerTel = itemView.findViewById(R.id.walkerTel);
             walkerAddr = itemView.findViewById(R.id.walkerAddr);

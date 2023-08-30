@@ -73,7 +73,7 @@ public class HomeFragment2 extends Fragment {
         walkerList = new ArrayList<WalkerProfile>();
 
         readFirebaseValue();
-        walkerListAdapter = new WalkerListAdapter(walkerList);
+        walkerListAdapter = new WalkerListAdapter(walkerList,getContext());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager( view.getContext(),
                 RecyclerView.VERTICAL, false);

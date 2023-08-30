@@ -100,18 +100,7 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         btnImgInsert= findViewById(R.id.btnImgInsert);
         imgProfile = findViewById(R.id.imgProfile);
 
-
-
-
-
-
-
-
         firebaseManager =new FirebaseManager();
-
-
-
-
 
         etName = findViewById(R.id.etName);
         etTel = findViewById(R.id.etTel);
@@ -176,7 +165,7 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseManager.fireBaseImgProfileUpload(progressBar,dogUUID,imgUrl,OwnerMypageAdd.this,dogUUID);
+                firebaseManager.fireBaseImgProfileUpload(progressBar,dogUUID,imgUrl,OwnerMypageAdd.this);
             }
         });
         btnInfoInsert.setOnClickListener(new View.OnClickListener() {

@@ -73,7 +73,7 @@ public class FirebaseManager {
     }
 
 
-    public void fireBaseImgProfileUpload(ProgressBar progressBar, String uuid,Uri imgUrl,Context context,String path)
+    public void fireBaseImgProfileUpload(ProgressBar progressBar, String uuid,Uri imgUrl,Context context)
     {
         if (imgUrl == null) {
             return;
@@ -84,7 +84,7 @@ public class FirebaseManager {
         String fileName = "PROFILE_" + uuid+ ".jpg";
 
         //저장할 파일 위치에 대한 참조객체
-        StorageReference imgRef = firebaseStorage.getReference(uid +path +"/"+ fileName); //저장할 이름
+        StorageReference imgRef = firebaseStorage.getReference(uid +"/"+ fileName); //저장할 이름
         //폴더가 없으면 만들고 있으면 그냥 참조한다
 
         //위 저장 경로 참조객체에게 실제파일 업로드 시키기
@@ -129,20 +129,14 @@ public class FirebaseManager {
                     Glide.with(view.getContext())
                             .load(uri)
                             .into(profileImg);
-
                 }
             });
         }
-
-
-
     }
-
-    public void fireBaseImgLoad2(ImageView profileImg,Context context,View view, String uuid,String path) {
+    public void fireBaseOwnerListImgLoad(ImageView profileImg,Context context, String dogUUID) {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        String fileName = "PROFILE_" + uuid+ ".jpg";
-
-        StorageReference imgRef = storageReference.child(uid+path+"/"+fileName);
+        String fileName = "PROFILE_" + dogUUID+ ".jpg";
+        StorageReference imgRef = storageReference.child(uid+"/"+fileName);
         Toast.makeText(context,"imgRef",Toast.LENGTH_SHORT).show();
         if(imgRef != null) {
             imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -150,17 +144,15 @@ public class FirebaseManager {
                 public void onSuccess(Uri uri) {
                     Toast.makeText(context,"사진불러오기 성공" + uri.toString(),Toast.LENGTH_SHORT).show();
                     Log.d("uri로그 " , uri.toString());
-                    Glide.with(view.getContext())
+                    Glide.with(context)
                             .load(uri)
                             .into(profileImg);
-
                 }
             });
         }
-
-
-
     }
+
+
     public void fireBaseImgDelete(int num)
     {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();

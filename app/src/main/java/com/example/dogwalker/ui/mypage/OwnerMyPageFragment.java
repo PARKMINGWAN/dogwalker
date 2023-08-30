@@ -381,25 +381,6 @@ public class OwnerMyPageFragment extends Fragment {
         });
     }
 
-//    private void fireBaseImgLoad(ImageView imageView, Context context, String path) {
-//        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-//
-//        StorageReference imgRef = storageReference.child(uid);
-//        Toast.makeText(getContext(), "imgRef", Toast.LENGTH_SHORT).show();
-//        if (imgRef != null) {
-//            imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    Toast.makeText(getContext(), "사진불러오기 성공", Toast.LENGTH_SHORT).show();
-//                    Glide.with(context)
-//                            .load(storageReference)
-//                            .into(imageView);
-//
-//                    imageView.setImageURI(uri);
-//                }
-//            });
-//        }
-//    }
 
 
 }

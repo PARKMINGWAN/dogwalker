@@ -126,7 +126,8 @@ if (value!=null) {
             txtCompleteDay.setText(applicationWalkerProfile.getCompleteDay());
             mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
             mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID).setValue(applicationWalkerProfile);
-            finish();
+            Intent intent1 = new Intent(WalkerDetail.this, ApplicationList.class);
+            startActivity(intent1);
         }
     });
     btnApplication.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +140,8 @@ if (value!=null) {
 
 
 
-            finish();
+            Intent intent1 = new Intent(WalkerDetail.this, ApplicationList.class);
+            startActivity(intent1);
         }
     });
 

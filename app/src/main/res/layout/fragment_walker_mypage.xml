@@ -236,17 +236,6 @@
                 android:text="추가(intent)" />
 
             <Button
-                android:id="@+id/btnOwner"
-                style="@style/btnTextStyle"
-                android:layout_width="320dp"
-                android:layout_gravity="center"
-                android:backgroundTint="#011EB1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:text="반려인 페이지로" />
-
-            <Button
                 android:id="@+id/btnimgInsert"
                 style="@style/btnTextStyle"
                 android:layout_width="320dp"
@@ -266,16 +255,6 @@
                 android:layout_marginRight="10dp"
                 android:layout_height="wrap_content"
                 android:text="이미지 삭제" />
-            <Button
-                android:id="@+id/btnReservation"
-                style="@style/btnTextStyle"
-                android:layout_width="320dp"
-                android:layout_gravity="center"
-                android:backgroundTint="#011EB1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:text="예약신청현황" />
 
             <Button
                 android:id="@+id/btnLogout"

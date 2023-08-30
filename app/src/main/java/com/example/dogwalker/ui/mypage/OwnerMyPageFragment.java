@@ -89,9 +89,6 @@ public class OwnerMyPageFragment extends Fragment {
         btnImgInsert = view.findViewById(R.id.btnimgInsert);
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnAdd = view.findViewById(R.id.btnAdd);
-        btnReservation = view.findViewById(R.id.btnReservation);
-        btnPayment = view.findViewById(R.id.btnPayment);
-        btnWalker = view.findViewById(R.id.btnWalker);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -100,16 +97,6 @@ public class OwnerMyPageFragment extends Fragment {
         txtMyDog = view.findViewById(R.id.txtMyDog);
 //        txtDogAge = view.findViewById(R.id.txtDogAge);
 //        txtDogWalk = view.findViewById(R.id.txtDogWalk);
-
-        btnWalker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), Walker_tab.class);
-                startActivity(intent);
-
-            }
-        });
-
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 로그인된 사용자
@@ -152,13 +139,6 @@ public class OwnerMyPageFragment extends Fragment {
 //        etDogAge = dialogView.findViewById(R.id.etDogAge);
 //        etDogWalk = dialogView.findViewById(R.id.etDogWalk);
 
-        btnReservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                 Intent intent = new Intent(view.getContext(), ApplicationList.class);
-                 startActivity(intent);
-            }
-        });
 
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,13 +171,6 @@ public class OwnerMyPageFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), OwnerMypageAdd.class);
                 startActivity(intent);
-
-            }
-        });
-
-        btnPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
             }
         });

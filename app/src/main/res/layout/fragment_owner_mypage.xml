@@ -230,17 +230,6 @@
                 android:layout_height="wrap_content"
                 android:text="추가(intent)" />
 
-            <Button
-                android:id="@+id/btnPayment"
-                style="@style/btnTextStyle"
-                android:layout_width="320dp"
-                android:backgroundTint="#011EB1"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:text="결제" />
-
 
             <Button
                 android:id="@+id/btnimgInsert"
@@ -254,27 +243,6 @@
                 android:text="이미지 추가"
                 />
 
-            <Button
-                android:id="@+id/btnWalker"
-                style="@style/btnTextStyle"
-                android:layout_width="320dp"
-                android:layout_gravity="center"
-                android:backgroundTint="#011EB1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:text="신청자 페이지로" />
-
-            <Button
-                android:id="@+id/btnReservation"
-                style="@style/btnTextStyle"
-                android:layout_width="320dp"
-                android:layout_gravity="center"
-                android:backgroundTint="#011EB1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_height="wrap_content"
-                android:text="예약신청목록" />
             <Button
                 android:id="@+id/btnLogout"
                 style="@style/btnTextStyle"

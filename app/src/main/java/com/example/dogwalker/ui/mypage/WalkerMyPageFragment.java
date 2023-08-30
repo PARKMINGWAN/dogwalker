@@ -94,7 +94,6 @@ public class WalkerMyPageFragment extends Fragment {
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnImgDelete = view.findViewById(R.id.btnImgDelete);
         btnAdd = view.findViewById(R.id.btnAdd);
-        btnReservation =view.findViewById(R.id.btnReservation);
         txtName = view.findViewById(R.id.txtName);
         txtId = view.findViewById(R.id.txtId);
         txtPwd = view.findViewById(R.id.txtPwd);
@@ -146,16 +145,6 @@ public class WalkerMyPageFragment extends Fragment {
         etCareer = dialogView.findViewById(R.id.etCareer);
         etNurture = dialogView.findViewById(R.id.etNurture);
 
-
-
-
-        btnReservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ApplicationWalkerList.class);
-                startActivity(intent);
-            }
-        });
         btnImgInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

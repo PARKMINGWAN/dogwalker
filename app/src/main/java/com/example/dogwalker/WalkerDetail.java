@@ -97,6 +97,7 @@ if (value!=null) {
         btnCancel.setVisibility(View.GONE);
         btnComplete.setVisibility(View.GONE);
         txtWait.setVisibility(View.VISIBLE);
+
     }else if(value.getIsReservation().equals("2"))//오너가 인수인계 하는 단계 산책완료로 넘어감
     {
         btnComplete.setVisibility(View.VISIBLE);
@@ -105,6 +106,7 @@ if (value!=null) {
         txtDay.setVisibility(View.GONE);
         txtCompleteDay.setVisibility(View.GONE);
         txtWait.setVisibility(View.GONE);
+
     }else  if(value.getIsReservation().equals("3"))
     {
         btnComplete.setVisibility(View.VISIBLE);
@@ -134,6 +136,8 @@ if (value!=null) {
 
             mDatabase.child("ApplicationList").child("owner").child(ownerUid).child(walkerUUID).setValue(applicationWalkerProfile);
             mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID).setValue(applicationWalkerProfile);
+
+
 
             finish();
         }
@@ -183,15 +187,23 @@ if (value!=null) {
             }
         });
     }
-    public void readProfileFirebaseValue(FirebaseCallback callback) {
 
-        DatabaseReference uidRef = mDatabase.child("ApplicationList").child("walker").child(walkerUid).child(walkerUUID);
+
+
+    public interface FirebaseCallbackOwnerProfile {
+        void onResponse(OwnerProfile value);
+    }
+
+    public void readWalkerProfileFirebaseValue(FirebaseCallbackOwnerProfile callback) {
+
+        DatabaseReference uidRef = mDatabase.child("list").child("owner").child(dogUUID);
         uidRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
 
-                    ApplicationWalkerProfile value = task.getResult().getValue(ApplicationWalkerProfile.class);
+                    OwnerProfile value = task.getResult().getValue(OwnerProfile.class);
+
                     callback.onResponse(value);
                 } else {
 
@@ -199,4 +211,6 @@ if (value!=null) {
             }
         });
     }
+
+
 }

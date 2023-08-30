@@ -74,6 +74,7 @@ public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback
         txtOwnerAddr=findViewById(R.id.txtAddr);
         txtOwnerTel=findViewById(R.id.txtTel);
         btnApplication = findViewById(R.id.btnApply);
+        txtDogWalk = findViewById(R.id.txtDogWalk);
 
         applicationWalkerProfile = new ApplicationWalkerProfile();
         walkerUUID = UUID.randomUUID().toString();
@@ -93,6 +94,7 @@ public class OwnerDetail extends AppCompatActivity implements OnMapReadyCallback
                     txtDogAge.setText(value.getDogAge());
                     txtOwnerAddr.setText(value.getAddr());
                     txtOwnerTel.setText(value.getOwnerTel());
+                    txtDogWalk.setText(value.getWalkTime());
                     ownerUid=value.getUid();
 
                 }

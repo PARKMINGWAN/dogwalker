@@ -187,9 +187,7 @@ public class OwnerMypageAdd extends AppCompatActivity implements OnMapReadyCallb
 
                 addItem(ownerProfile);
 
-                Intent intent = new Intent(getApplicationContext(), OwnerMyPageFragment.class);
-
-                startActivity(intent);
+                finish();
             }
         });
 

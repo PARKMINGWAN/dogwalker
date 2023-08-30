@@ -113,8 +113,7 @@ public class WalkerMypageAdd extends AppCompatActivity {
                 walkerProfile.setWalkerUUID(walkerUUID);
                 addItem(walkerProfile);
 
-                Intent intent = new Intent(getApplicationContext(), WalkerMyPageFragment.class);
-                startActivity(intent);
+               finish();
 
             }
         });

@@ -270,14 +270,14 @@ public class OwnerMyPageFragment extends Fragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setView(dialogView);
 
-                etName.setText(owner2.getName());
+                //etName.setText(owner2.getName());
                 etId.setText(owner2.getId());
                 etPwd.setText(owner2.getPwd());
                 etAddr.setText(owner2.getAddr());
                 etTel.setText(owner2.getTel());
-                etBreed.setText(owner2.getBreed());
-                etDogAge.setText(owner2.getDog_age());
-                etDogWalk.setText(owner2.getDog_walk());
+//                etBreed.setText(owner2.getBreed());
+//                etDogAge.setText(owner2.getDog_age());
+//                etDogWalk.setText(owner2.getDog_walk());
 
                 builder.setNegativeButton("취소", null);
                 builder.setPositiveButton("수정", new DialogInterface.OnClickListener() {
@@ -287,22 +287,22 @@ public class OwnerMyPageFragment extends Fragment {
                         owner2.setAddr(etAddr.getText().toString());
                         owner2.setTel(etTel.getText().toString());
                         owner2.setPwd(etPwd.getText().toString());
-                        owner2.setBreed(etBreed.getText().toString());
+                        //owner2.setBreed(etBreed.getText().toString());
                         owner2.setId(etId.getText().toString());
-                        owner2.setName(etName.getText().toString());
-                        owner2.setDog_age(etDogAge.getText().toString());
-                        owner2.setDog_walk(etDogWalk.getText().toString());
+//                        owner2.setName(etName.getText().toString());
+//                        owner2.setDog_age(etDogAge.getText().toString());
+//                        owner2.setDog_walk(etDogWalk.getText().toString());
 
                         mDatabase.child(uid).child("owner").setValue(owner2);
 
-                        txtName.setText(owner2.getName());
+                        //xtName.setText(owner2.getName());
                         txtId.setText(owner2.getId());
                         txtAddr.setText(owner2.getAddr());
                         txtTel.setText(owner2.getTel());
                         txtPwd.setText(owner2.getPwd());
-                        txtBreed.setText(owner2.getBreed());
-                        txtDogAge.setText(owner2.getDog_age());
-                        txtDogWalk.setText(owner2.getDog_walk());
+//                        txtBreed.setText(owner2.getBreed());
+//                        txtDogAge.setText(owner2.getDog_age());
+//                        txtDogWalk.setText(owner2.getDog_walk());
 
                     }
                 });

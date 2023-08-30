@@ -98,7 +98,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
             holder.walkerAddr.setText(walker.getWalkerAddr());
             holder.walkerNurture.setText(walker.getWalkerNurture());
             holder.walkerCareer.setText(walker.getWalkerCareer());
-            firebaseManager.fireBaseWalkerListImgLoad(holder.imgWalker,context,walker.getWalkerUUID());
+            firebaseManager.fireBaseWalkerListImgLoad(holder.imgProfile,context,walker.getWalkerUUID());
 
 
 
@@ -130,7 +130,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView walkerName, walkerTel, walkerAddr, walkerNurture, walkerCareer;
-        ImageView imgWalker;
+        ImageView imgProfile;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -141,7 +141,7 @@ public class WalkerListAdapter extends RecyclerView.Adapter<WalkerListAdapter.My
             walkerAddr = itemView.findViewById(R.id.walkerAddr);
             walkerNurture = itemView.findViewById(R.id.walkerNurture);
             walkerCareer = itemView.findViewById(R.id.walkerCareer);
-            imgWalker = itemView.findViewById(R.id.imgWalker);
+            imgProfile = itemView.findViewById(R.id.imgProfile);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

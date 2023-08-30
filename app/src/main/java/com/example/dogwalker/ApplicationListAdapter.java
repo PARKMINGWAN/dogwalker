@@ -89,7 +89,7 @@ public class ApplicationListAdapter extends RecyclerView.Adapter<ApplicationList
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView walkerName, walkerTel, walkerAddr, walkerNurture, walkerCareer;
-        ImageView imgWalker;
+        ImageView imgProfile;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,7 +99,7 @@ public class ApplicationListAdapter extends RecyclerView.Adapter<ApplicationList
             walkerAddr = itemView.findViewById(R.id.walkerAddr);
             walkerNurture = itemView.findViewById(R.id.walkerNurture);
             walkerCareer = itemView.findViewById(R.id.walkerCareer);
-            imgWalker = itemView.findViewById(R.id.imgWalker);
+            imgProfile = itemView.findViewById(R.id.imgProfile);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
